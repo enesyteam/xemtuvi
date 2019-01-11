@@ -1,0 +1,169 @@
+<div class="stars"></div>
+		<div class="twinkling"></div>
+		<div class="clouds"></div>
+
+		<div class="p_absolute z-index-10">
+			<div class="container full_height clearfix">
+				<div class="d_table full_height full_width t_center">
+					<div class="d_table_cell">
+						<div class="main_content bg_white">
+							<div class="p_absolute dynamic_content d_flex v_center full_height {{selectedAge ? 'selected' : ''}} d_flex v_center">
+								<div class="full_width d_flex v_center">
+									<div ng-if="!selectedAge">
+										<h1 class="main_title" style="font-weight: 700;">XEM TỬ VI 2019</h1>
+										<p class="sub_title">Vui lòng chọn tuổi của bạn!</p>
+									</div>
+									<div ng-if="selectedAge && !loading" class="full_width full_height white">
+										<h3 class="">Tử vi tuổi <strong>{{getAgeName(selectedAge)}}</strong></h3>
+										<p class="sub_title">Vui lòng nhập ngày sinh dương lịch!</p>
+										<div class="f_input">
+											<form>
+												<div class="form-group row">
+												    <label for="inputDate" class="col-sm-4 col-form-label">Họ tên:</label>
+												    <div class="col-sm-8">
+												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập Họ và tên bạn" ng-model="data.name">
+												    </div>
+											  	</div>
+												<div class="form-group row">
+												    <label for="inputDate" class="col-sm-4 col-form-label">Ngày:</label>
+												    <div class="col-sm-8">
+												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập ngày sinh" ng-model="data.day">
+												    </div>
+											  	</div>
+											  	<div class="form-group row">
+												    <label for="inputDate" class="col-sm-4 col-form-label">Tháng:</label>
+												    <div class="col-sm-8">
+												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập tháng sinh" ng-model="data.month">
+												    </div>
+											  	</div>
+											  	<div class="form-group row">
+												    <label for="inputDate" class="col-sm-4 col-form-label">Năm:</label>
+												    <div class="col-sm-8">
+												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập năm sinh" ng-model="data.year">
+												    </div>
+											  	</div>
+											  	<div class="row" style="padding-bottom: 20px;">
+											      <div class="col-sm-4">
+											      	Giới tính:
+											      </div>
+											      <div class="col-sm-8"  style="float: none;">
+											        <div class="form-check form-check-inline">
+											          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="data.gender" value="male">
+											          <label class="form-check-label" for="gridRadios1">
+											            Nam
+											          </label>
+											        </div>
+											        <div class="form-check form-check-inline" style="margin-left: 20px;">
+											          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="data.gender" value="female">
+											          <label class="form-check-label" for="gridRadios2">
+											            Nữ
+											          </label>
+											        </div>
+											      </div>
+											    </div>
+											  	<div class="row">
+											  		<div class="col-sm-4">
+											  			<button ng-click="resetSelectedAge()" type="button" class="btn btn-danger btn-lg btn-block">Trở về</button>
+											  		</div>
+											  		<div class="col-sm-8">
+											  			<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="submitDate()">Xem tử vi</button>
+											  		</div>
+											  	</div>
+											</form>
+										</div>
+									</div>
+									<div class="waiting_screen full_width" ng-if="loading">
+								  		<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+								  		<div class="white">
+								  			<h3>
+								  				<strong>Đang xử lý thông tin...</strong>
+								  			</h3>
+								  			<div>
+								  				Vui lòng chờ trong giây lát!
+								  			</div>
+								  		</div>
+								  	</div>
+								</div>
+							</div>
+							<div class="fix_content">
+								<div class="row h_100 d_table full_width">
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('tys')">
+											<div class="animal_img tys"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('suu')">
+											<div class="animal_img suu"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('dan')">
+											<div class="animal_img dan"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('mao')">
+											<div class="animal_img mao"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row h_100 d_table full_width">
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('thin')">
+											<div class="animal_img thin"></div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 d_table_cell full_height">
+										
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('tyj')">
+											<div class="animal_img tyj"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row h_100 d_table full_width">
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('ngo')">
+											<div class="animal_img ngo"></div>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 d_table_cell full_height">
+										
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('mui')">
+											<div class="animal_img mui"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row h_100 d_table full_width">
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('than')">
+											<div class="animal_img than"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('dau')">
+											<div class="animal_img dau"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('tuat')">
+											<div class="animal_img tuat"></div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6 d_table_cell full_height">
+										<div class="animal full_height t_center" ng-click="ageClick('hoi')">
+											<div class="animal_img hoi"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

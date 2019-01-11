@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" ng-app="goSua">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="SemiColonWeb" />
+
+	<!-- Stylesheets
+	============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link class="next-head" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=vietnamese" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="/assets/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Document Title
+	============================================= -->
+	<title>Xem tử vi 2019</title>
+
+	<!-- Facebook Pixel Code -->
+	<script>
+	  !function(f,b,e,v,n,t,s)
+	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	  n.queue=[];t=b.createElement(e);t.async=!0;
+	  t.src=v;s=b.getElementsByTagName(e)[0];
+	  s.parentNode.insertBefore(t,s)}(window, document,'script',
+	  'https://connect.facebook.net/en_US/fbevents.js');
+	  fbq('init', '293824861445959');
+	  fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"
+	  src="https://www.facebook.com/tr?id=293824861445959&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Facebook Pixel Code -->
+
+</head>
+
+<body class="stretched" ng-controller="MainCtrl">
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId            : '1085772744867580',
+	      autoLogAppEvents : true,
+	      xfbml            : true,
+	      version          : 'v3.1'
+	    });
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div class="full_height clearfix">
+		
+		<div ui-view class="main-view"> </div>
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script src="assets/js/scripts-angular.min.js"></script>
+	<script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+    <script src="/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+	<script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<script>
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyBxJ3_k9WBoxggnNSmTRoGlogaxeBD5GYw",
+      authDomain: "gosua-4f8d4.firebaseapp.com",
+      databaseURL: "https://gosua-4f8d4.firebaseio.com",
+      projectId: "gosua-4f8d4",
+      storageBucket: "gosua-4f8d4.appspot.com",
+      messagingSenderId: "621807127051"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="assets/js/angularfire.min.js"></script>
+    <script src="assets/js/firebaseService.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/ctrl.js"></script>
+	<script src="assets/js/DetailCtrl.js"></script>
+
+	<!-- Footer Scripts
+	============================================= -->
+</body>
+</html>
