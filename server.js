@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-// var server = http.createServer(app);
+var server = http.createServer(app);
 
 var certOptions = {
   key: fs.readFileSync( path.join( __dirname, 'ssl', 'server.key' ) ),
@@ -43,7 +43,7 @@ var certOptions = {
 
 // console.log( certOptions );
 
-var server = https.createServer( certOptions, app )
+// var server = https.createServer( certOptions, app )
 
 app.use('/assets', express.static('assets'));
 app.use('/ssl', express.static('ssl'));
