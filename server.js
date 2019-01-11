@@ -66,8 +66,8 @@ app.get( '/signup/facebook/complete', function( req, res ) {
 
 
 // development mode
-  server.listen(5000, 'localhost', function() {
-    console.log("Meo server listening at %s:%d ", app.get('ip'), app.get('port'));
-  });
+  // server.listen(5000, 'localhost', function() {
+  //   console.log("Meo server listening at %s:%d ", app.get('ip'), app.get('port'));
+  // });
 // productione mode
-// app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
