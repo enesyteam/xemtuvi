@@ -1,5 +1,5 @@
 goSua.controller('DetailCtrl', function( $rootScope, $scope, $http, $window, $document, $filter, $stateParams,
-	$timeout, MFirebaseService,toastr, toastrConfig, $interval, $location ) {
+	$timeout, MFirebaseService,toastr, toastrConfig, $interval, $location, $uibModal, $uibModalStack ) {
 	$scope.Math = window.Math;
 	$rootScope.currentURL = $location.absUrl();
 	$rootScope.title = 'Lá số tử vi 2019 của ' + $stateParams.name;
@@ -20,6 +20,50 @@ goSua.controller('DetailCtrl', function( $rootScope, $scope, $http, $window, $do
 	        }
 	    }
 	};
+
+	function formatDate(date) {
+	    var d = new Date(date),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear();
+
+	    if (month.length < 2) month = '0' + month;
+	    if (day.length < 2) day = '0' + day;
+
+	    return [day, month, year].join('-') + ': ' + d.getHours() + 'h' + d.getMinutes() + 'ph';
+	}
+
+	$scope.order = function(product) {
+		$uibModal.open({
+	      ariaLabelledBy: 'modal-title-top',
+	      ariaDescribedBy: 'modal-body-top',
+	      templateUrl: 'myModalContent.html',
+	      controller: function($scope) {
+	        $scope.name = 'top';
+	        $scope.loading = false;
+	        $scope.submit = function() {
+	        	$scope.loading = true;
+	        	// console.log(product);
+	        	MFirebaseService.addOrder(Object.assign(product, {
+	        		mobile: $scope.mobile,
+					birthday: $stateParams.day + '/' + $stateParams.month + '/' + $stateParams.year,
+					gender: $stateParams.gender,
+					name: $stateParams.name,
+					order_time: formatDate(new Date()),
+				})).then( function(response) {
+					$scope.loading = false;
+	        		// alert('Đặt hàng thành công');
+	        		closeModal();
+	        		toastr.success("Cảm ơn bạn đã để lại thông tin. Chúng tôi sẽ liên hệ với bạn ngay!")
+	        	} );
+	        }
+	      }
+	    });
+	}
+
+	function closeModal() {
+    	$uibModalStack.dismissAll();
+    }
 
 	var years = [
 	  {

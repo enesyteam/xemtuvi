@@ -1,6 +1,7 @@
 var goSua = angular.module('goSua', [
 	'ui.router',
 	'ngAnimate',
+    'ui.bootstrap',
   	'ngSanitize',
     'mFirebase',
     'toastr',

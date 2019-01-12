@@ -3,6 +3,7 @@ body {
     font-size: 16px;
     line-height: 1.7;
     color: #4E4242;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 html, 
@@ -670,10 +671,18 @@ a.notice__action {
 	
 	background: url(/images/mingshi_bg.png) no-repeat;
 	background-size: 100%;
-	    height: 363px;
+	    min-height: 363px;
 	    padding: 30px 50px;
 	    display: flex;
     align-items: center;
+}
+
+
+
+@media (max-width : 480px) {
+    .hidden-sm-down {
+    display: none;
+  }
 }
 
 .section {
@@ -776,6 +785,7 @@ a.notice__action {
 	/*border: 2px solid #cc2a1e;*/
 	height: 100%;
 	width: 100%;
+  display: flex;
 }
 .discount {
 	width: 100px;

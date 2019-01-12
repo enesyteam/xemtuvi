@@ -66,6 +66,14 @@ app.get( '/signup/facebook/complete', function( req, res ) {
   res.sendFile(path.join(__dirname, 'index2.html'));
 } );
 
+// app.get( '/order', function( req, res ) {
+//   res.sendFile(path.join(__dirname, 'pages/order.html'));
+// } );
+
+// app.get( '/uib/template/modal/window.html', function( req, res ) {
+//   res.sendFile(path.join(__dirname, 'pages/order.html'));
+// } );
+
 
 // development mode
   // server.listen(5000, 'localhost', function() {
