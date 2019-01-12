@@ -1,5 +1,25 @@
 goSua.controller('DetailCtrl', function( $rootScope, $scope, $http, $window, $document, $filter, $stateParams,
-	$timeout, MFirebaseService,toastr, toastrConfig, $interval ) {
+	$timeout, MFirebaseService,toastr, toastrConfig, $interval, $location ) {
+	$scope.Math = window.Math;
+	$rootScope.currentURL = $location.absUrl();
+	$rootScope.title = 'Lá số tử vi 2019 của ' + $stateParams.name;
+	$rootScope.description = 'Click để xem lá số tử vi năm 2019 của ' + $stateParams.name;
+	$rootScope.ogImage = $location.protocol() + '://' + $location.host() + ':' + $location.port() 
+		+ '/images/section-images/' + $stateParams.lunarYear + '.png';
+	$scope.slickConfig = {
+	    enabled: true,
+	    autoplay: true,
+	    arrows: false,
+	    draggable: true,
+	    autoplaySpeed: 5000,
+	    method: {},
+	    event: {
+	        beforeChange: function (event, slick, currentSlide, nextSlide) {
+	        },
+	        afterChange: function (event, slick, currentSlide, nextSlide) {
+	        }
+	    }
+	};
 
 	var years = [
 	  {
@@ -1951,24 +1971,593 @@ goSua.controller('DetailCtrl', function( $rootScope, $scope, $http, $window, $do
 			"gender": "nam",
 			"ages": "1960 1972 1984 1996 2008"
 		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Hư Không Tạng Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Sửu, Dần',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m312.jpg",
+			"gender": "nam",
+			"ages": "1961 1973 1974 1985 1986 1997 1998"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Văn Thù Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mão',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m313.jpg",
+			"gender": "nam",
+			"ages": "1963 1975 1987 1999"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Phổ Hiền Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Thìn, Tỵ',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m314.jpg",
+			"gender": "nam",
+			"ages": "1964 1976 1977 1988 1989 2000 2001"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Đại Thế Chí Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Ngọ',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m315.jpg",
+			"gender": "nam",
+			"ages": "1966 1978 1990 2002"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Như Lai Đại Nhật',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mùi, Thân',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m316.jpg",
+			"gender": "nam",
+			"ages": "1967 1979 1980 1991 1992 2004"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật Bất Động Minh Vương',
+			"desc": 'Vị phật độ mệnh cho người tuổi Dậu',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m317.jpg",
+			"gender": "nam",
+			"ages": "1969 1981 1993 2005"
+		},
+		{
+			"name": 'Dây chuyền mặt phật bạc Phật A Di Đà',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tuất, Hợi',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "m318.jpg",
+			"gender": "nam",
+			"ages": "1958 1970 1971 1982 1983 1994 1995 2007"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Thiên Thủ Thiên Nhãn',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tý',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_tttn.jpg",
+			"gender": "nữ",
+			"ages": "1960 1972 1984 1996 2008"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Hư Không Tạng Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Sửu, Dần',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_hkt.jpg",
+			"gender": "nữ",
+			"ages": "1961 1973 1974 1985 1986 1997 1998 2010"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Văn Thù Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mão',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_vt.jpg",
+			"gender": "nữ",
+			"ages": "1963 1975 1987 1999 2011"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Phổ Hiền Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Thìn, Tỵ',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_ph.jpg",
+			"gender": "nữ",
+			"ages": "1964 1976 1977 1988 1989 2000 2001"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Đại Thế Chí Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Ngọ',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_dtc.jpg",
+			"gender": "nữ",
+			"ages": "1966 1978 1990 2002"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Như Lai Đại Nhật',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mùi, Thân',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_nldn.jpg",
+			"gender": "nữ",
+			"ages": "1967 1979 1980 1991 1992 2004"
+		},
+		{
+			"name": 'Vòng tay mặt Phật Bất Động Minh Vương',
+			"desc": 'Vị phật độ mệnh cho người tuổi Dậu',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_bdmv.jpg",
+			"gender": "nữ",
+			"ages": "1969 1981 1993 2005"
+		},
+		{
+			"name": 'Vòng tay mặt Phật A Di Đà',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tuất, Hợi',
+			"price": 299000,
+			"old_price": 499000,
+			"img_100": "vt_add.jpg",
+			"gender": "nữ",
+			"ages": "1958 1970 1971 1982 1983 1994 1995 2007"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Thiên Thủ Thiên Nhãn',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tý',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n111.jpg",
+			"gender": "nam",
+			"ages": "1960 1972 1984 1996 2008"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Hư Không Tạng Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Sửu, Dần',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n112.jpg",
+			"gender": "nam",
+			"ages": "1961 1973 1974 1985 1986 1997 1998"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Văn Thù Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mão',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n113.jpg",
+			"gender": "nam",
+			"ages": "1963 1975 1987 1999 2011"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Phổ Hiền Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Thìn, Tỵ',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n114.jpg",
+			"gender": "nam",
+			"ages": "1964 1976 1977 1988 1989 2000 2001"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Đại Thế Chí Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Ngọ',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n115.jpg",
+			"gender": "nam",
+			"ages": "1966 1978 1990 2002"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Như Lai Đại Nhật',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mùi, Thân',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n116.jpg",
+			"gender": "nam",
+			"ages": "1967 1979 1980 1991 1992 2004"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật Bất Động Minh Vương',
+			"desc": 'Vị phật độ mệnh cho người tuổi Dậu',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n117.jpg",
+			"gender": "nam",
+			"ages": "1969 1981 1993 2005"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh - Phật A Di Đà',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tuất, Hợi',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n118.jpg",
+			"gender": "nam",
+			"ages": "1958 1970 1971 1982 1983 1994 1995 2007"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Thiên Thủ Thiên Nhãn',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tý',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n211.jpg",
+			"gender": "nam",
+			"ages": "1960 1972 1984 1996 2008"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Hư Không Tạng Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Sửu, Dần',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n212.jpg",
+			"gender": "nam",
+			"ages": "1961 1973 1974 1985 1986 1997 1998 2010"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Văn Thù Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mão',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n213.jpg",
+			"gender": "nam",
+			"ages": "1963 1975 1987 1999 2011"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Phổ Hiền Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Thìn, Tỵ',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n214.jpg",
+			"gender": "nam",
+			"ages": "1964 1976 1977 1988 1989 2000 2001"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Đại Thế Chí Bồ Tát',
+			"desc": 'Vị phật độ mệnh cho người tuổi Ngọ',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n215.jpg",
+			"gender": "nam",
+			"ages": "1966 1978 1990 2002"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Như Lai Đại Nhật',
+			"desc": 'Vị phật độ mệnh cho người tuổi Mùi, Thân',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n216.jpg",
+			"gender": "nam",
+			"ages": "1967 1979 1980 1991 1992 2004"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật Bất Động Minh Vương',
+			"desc": 'Vị phật độ mệnh cho người tuổi Dậu',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n217.jpg",
+			"gender": "nam",
+			"ages": "1969 1981 1993 2005"
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng - Phật A Di Đà',
+			"desc": 'Vị phật độ mệnh cho người tuổi Tuất, Hợi',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n218.jpg",
+			"gender": "nam",
+			"ages": "1958 1970 1971 1982 1983 1994 1995 2007"
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh',
+			"desc": 'Biểu tượng của tiền tài, sức khỏe, công danh sự nghiệp , may mắn, bình an, hạnh phúc',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n221.jpg",
+			"gender": "nam",
+			"ages": ""
+		},
+		{
+			"name": 'Nhẫn Bát nhã tâm kinh',
+			"desc": 'Biểu tượng của tiền tài, sức khỏe, công danh sự nghiệp , may mắn, bình an, hạnh phúc',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n261.jpg",
+			"gender": "nam",
+			"ages": ""
+		},
+		{
+			"name": 'Nhẫn Kim cang chú',
+			"desc": 'Biểu tượng của may mắn, bình an, sức khỏe, trừ tà',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n231.jpg",
+			"gender": "nam",
+			"ages": ""
+		},
+		{
+			"name": 'Nhẫn Um Ma Ni Bát Ni Hồng',
+			"desc": 'Biểu tượng của may mắn, bình an, sức khỏe, trừ tà',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "n241.jpg",
+			"gender": "nam",
+			"ages": ""
+		},
+		{
+			"name": 'Vòng Chỉ đỏ kim vàng',
+			"desc": 'Chiếc vòng may mắn, tình duyên dành riêng cho bạn',
+			"price": 480000,
+			"old_price": 680000,
+			"img_100": "cdkv.jpg",
+			"gender": "nữ",
+			"ages": ""
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Tý',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tý',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_tys.jpg",
+			"gender": "nữ",
+			"ages": "1960 1972 1984 1996 2008"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Sửu',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Sửu',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_suu.jpg",
+			"gender": "nữ",
+			"ages": "1961 1973 1985 1997"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Dần',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Dần',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_dan.jpg",
+			"gender": "nữ",
+			"ages": "1974 1986 1998"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Mão',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Mão',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_mao.jpg",
+			"gender": "nữ",
+			"ages": "1963 1975 1987 1999"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Thìn',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Thìn',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_thin.jpg",
+			"gender": "nữ",
+			"ages": "1964 1976 1988 2000"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Tỵ',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tỵ',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_tyj.jpg",
+			"gender": "nữ",
+			"ages": "1955 1977 1989 2001"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Ngọ',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Ngọ',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_ngo.jpg",
+			"gender": "nữ",
+			"ages": "1966 1978 1990"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Mùi',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Mùi',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_mui.jpg",
+			"gender": "nữ",
+			"ages": "1967 1979 1991"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Thân',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Thân',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_than.jpg",
+			"gender": "nữ",
+			"ages": "1968 1980 1992"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Dậu',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Dậu',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_dau.jpg",
+			"gender": "nữ",
+			"ages": "1969 1981 1993"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Tuất',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tuất',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_tuat.jpg",
+			"gender": "nữ",
+			"ages": "1970 1982 1994"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ mã não tuổi Hợi',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Hợi',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmn_hoi.jpg",
+			"gender": "nữ",
+			"ages": "1971 1983 1995"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Tý',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tý',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_tys.jpg",
+			"gender": "nữ",
+			"ages": "1972 1984 1996"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Sửu',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Sửu',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_suu.jpg",
+			"gender": "nữ",
+			"ages": "1973 1985 1997"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Dần',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Dần',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_dan.jpg",
+			"gender": "nữ",
+			"ages": "1974 1986 1998"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Mão',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Mão',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_mao.jpg",
+			"gender": "nữ",
+			"ages": "1975 1987 1999"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Thìn',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Thìn',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_thin.jpg",
+			"gender": "nữ",
+			"ages": "1976 1988 2000"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Tỵ',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tỵ',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_tyj.jpg",
+			"gender": "nữ",
+			"ages": "1977 1989 2001"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Ngọ',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Ngọ',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_ngo.jpg",
+			"gender": "nữ",
+			"ages": "1978 1990"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Mùi',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Mùi',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_mui.jpg",
+			"gender": "nữ",
+			"ages": "1979 1991"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Thân',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Thân',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_than.jpg",
+			"gender": "nữ",
+			"ages": "1980 1992"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Dậu',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Dậu',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_dau.jpg",
+			"gender": "nữ",
+			"ages": "1981 1993"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Tuất',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Tuất',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_tuat.jpg",
+			"gender": "nữ",
+			"ages": "1982 1994"
+		},
+		{
+			"name": 'Vòng Chỉ đỏ đá mặt trăng tuổi Hợi',
+			"desc": 'Chiếc vòng tình duyên, may mắn dành riêng cho người tuổi Hợi',
+			"price": 350000,
+			"old_price": 590000,
+			"img_100": "cdmt_hoi.jpg",
+			"gender": "nữ",
+			"ages": "1983 1995"
+		},
+		{
+			"name": 'Bùa May mắn Solomon',
+			"desc": 'Bùa May mắn Solomon trợ giúp gia chủ cầu tài, cầu lộc, trừ tà, giúp sự nghiệp hanh thông phát triển',
+			"price": 450000,
+			"old_price": 650000,
+			"img_100": "ak211.jpg",
+			"gender": "nam",
+			"ages": ""
+		},
 	];
 
-	$scope.data = {
-		day: $stateParams.day,
-		month: $stateParams.month,
-		year: $stateParams.year,
-		lunar_year: $stateParams.lunarYear,
-		gender: $stateParams.gender,
-		name: $stateParams.name,
-	}
+	// $scope.data = {
+	// 	day: $stateParams.day,
+	// 	month: $stateParams.month,
+	// 	year: $stateParams.year,
+	// 	lunar_year: $stateParams.lunarYear,
+	// 	gender: $stateParams.gender,
+	// 	name: $stateParams.name,
+	// }
 
 	$scope.ads = [];
 
 	ads.filter(function (row) {
-		if(row.ages.split(" ").indexOf($scope.data.year) > -1) {
-			$scope.ads.push(row);
-			// console.log('found ads', row);
+		// quảng cáo phù hợp với mọi tuổi => kiểm tra giới tính
+		if (row.ages.length == 0) {
+			// quảng cáo không phân biệt giới tính
+			if (row.gender.length == 0) {
+				$scope.ads.push(row);
+			} else {
+				// kiểm tra giới tính
+				var genderVi = $scope.data.gender == 'male' ? 'nam' : 'nữ';
+				if (row.gender.split(" ").indexOf(genderVi) > -1) {
+					$scope.ads.push(row);
+				}
+			}
+		} else if(row.ages.split(" ").indexOf($scope.data.year) > -1) {
+			if (row.gender.length == 0) {
+				$scope.ads.push(row);
+			} else {
+				// kiểm tra giới tính
+				var genderVi = $scope.data.gender == 'male' ? 'nam' : 'nữ';
+				if (row.gender.split(" ").indexOf(genderVi) > -1) {
+					$scope.ads.push(row);
+				}
+			}
 		}
+		
 	} )
 
 	function shuffle(array) {
@@ -1992,4 +2581,14 @@ goSua.controller('DetailCtrl', function( $rootScope, $scope, $http, $window, $do
 	}
 
 	shuffle($scope.ads);
+
+	$scope.getAdsLength = function(){
+	    var results = [];
+	    
+	    while ($scope.ads.length) {
+	        results.push($scope.ads.splice(0, Math.floor($scope.ads.length/2)));
+	    }
+	    
+	    return results;
+	}
 } )

@@ -3,7 +3,13 @@
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
+	<meta name="author" content="Cá Cơm" />
+
+	<meta property="og:url"           content="{{currentURL}}" />
+  	<meta property="og:type"          content="website" />
+  	<meta property="og:title"         content="{{title}}" />
+  	<meta property="og:description"   content="{{description}}" />
+  	<meta property="og:image"         content="{{ogImage}}" />
 
 	<!-- Stylesheets
 	============================================= -->
@@ -13,12 +19,15 @@
 	<link rel="stylesheet" href="/assets/style.css" type="text/css" />
 	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 	<link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+	<link rel="stylesheet" href="node_modules/slick-carousel/slick/slick.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
 	============================================= -->
-	<title>Xem tử vi 2019</title>
+	<title>{{title}}</title>
+
+
 
 	<!-- Facebook Pixel Code -->
 	<script>
@@ -84,6 +93,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
 	<script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<script src="/node_modules/slick-carousel/slick/slick.js"></script>
+	<script src="assets/js/angular-slick.js"></script>
 	<script>
       // Initialize Firebase
       var config = {

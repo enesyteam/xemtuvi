@@ -1,11 +1,18 @@
 <div class="container detail">
-	<a href="/">
-		<div class="row four_tu">
-	        <div class="col-sm-12">
-	        	<h3 style="font-weight: 700">Năm Kỷ Hợi - 2019: Lưu niên vận thế {{data.gender == 'male' ? 'anh' : 'chị'}}: {{data.name || 'Không rõ' }}, tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
-	        </div>
-	    </div>
-	</a>
+	<div class="row four_tu">
+        <div class="col-sm-12">
+        	<h3 style="font-weight: 700">Năm Kỷ Hợi - 2019: Lưu niên vận thế {{data.gender == 'male' ? 'anh' : 'chị'}}: {{data.name || 'Không rõ' }}, tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
+        	<a href="/" class="btn btn-danger">Xem tử vi tuổi khác</a>
+        	<div>
+        		<span style="font-size: 18px; font-weight: 700">Chia sẻ lá số tử vi của bạn </span>
+        		<div class="fb-share-button" 
+        			data-size="large"
+				    data-href="{{currentURL}}" 
+				    data-layout="button">
+				  </div>
+        	</div>
+        </div>
+    </div>
     <div class="row intro section">
     	<div class="col-md-6 col-sm-6">
     		<img src="/images/tong-quan.png" style="width: 150px;">
@@ -43,10 +50,39 @@
     	</div>
     </div>
     <div class="row section">
-		<div class="col-md-5">
-			<img ng-src="{{'/images/section-images/' + data.lunar_year + '.png'}}">
+		<div class="col-md-4">
+			<slick infinite=true slides-to-show=1 slides-to-scroll=1 settings="slickConfig" style="height: 100%;width: 100%">
+				<img ng-src="{{'/images/section-images/' + data.lunar_year + '.png'}}">
+				<div class="ads_container" 
+					ng-repeat="(key, value) in [].constructor(Math.floor(ads.length/3)) track by $index"
+					>
+						<div class="ads_content d_flex" style="flex-direction: column;padding: 15px;border: none">
+							<div>
+								<div class="ads_img">
+									<img class="img full_width" ng-src="/images/ads/1000x1000/{{ads[key+2*Math.floor(ads.length/3)].img_100}}">
+								</div>
+							</div>
+							<div style="line-height: 1.2;font-size: 14px;margin-bottom: 10px;">
+								<h4 style="font-weight: 700;color:#000">{{ads[key+2*Math.floor(ads.length/3)].name}} tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
+								<div>{{ads[key+2*Math.floor(ads.length/3)].desc}}</div>
+							</div>
+							<div class="d_count">
+								<span>-{{100 - ads[key+2*Math.floor(ads.length/3)].price/ads[key+2*Math.floor(ads.length/3)].old_price*100 | number: 0}}</span><span>%</span>
+							</div>
+							<div class="col-md-3 full_width">
+								<div class="d_flex" style="flex-direction: row">
+									<div class="full_width" style="text-align: center">
+										<div>Giá cũ: <span style="font-weight: 700;text-decoration: line-through;">{{ads[key+Math.floor(ads.length/3)].old_price | number: 0}} đ</span></div>
+										<h1 style="font-weight: 700;color:#ef1c1c;margin: 10px auto;">{{ads[key+2*Math.floor(ads.length/3)].price | number: 0}} đ</h1>
+										<button class="btn btn-danger btn-block">ĐẶT MUA NGAY</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</slick>
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-8">
 			<h3 ng-bind-html="selected.section1_title" style="font-size: 18px;font-weight: 700; color: #D94B4B;"></h3>
 			<div class="itext">
 	            <span ng-bind-html="selected.section1_itext"></span>
@@ -97,37 +133,7 @@
 			<span ng-bind-html="selected.section3_sunghiep"></span>
 		</div>
 	</div>
-	<div class="row section ads ads_type1" ng-if="ads.length > 1">
-		<div class="ads_container">
-			<div class="ads_content">
-				<div class="col-md-1 full_height d_flex v_center">
-					<div class="discount">
-						<span>-68</span><span>%</span>
-					</div>
-				</div>
-				<div class="col-md-8 full_height d_flex v_center">
-					<div class="d_flex" style="flex-direction: row">
-						<div class="ads_img">
-							<img class="img_150" ng-src="/images/ads/{{ads[0].img_100}}">
-						</div>
-						<div style="padding-left: 30px">
-							<h3 style="font-weight: 700;color:#000">{{ads[0].name}} tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
-							<div>{{ads[0].desc}}</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 full_height d_flex v_center">
-					<div class="d_flex" style="flex-direction: row">
-						<div style="padding-left: 30px; text-align: center">
-							<div>Giá cũ: <span style="font-weight: 700;text-decoration: line-through;">{{ads[0].old_price | number: 0}} đ</span></div>
-							<h1 style="font-weight: 700;color:#ef1c1c;margin: 0;">{{ads[1].price | number: 0}} đ</h1>
-							<button class="btn btn-danger btn-block">ĐẶT MUA NGAY</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<div class="row section section3">
 		<div class="col-md-6">
 			<div class="full_width t_center">
@@ -150,6 +156,40 @@
 			</h3>
 			<span ng-bind-html="selected.section4_tinhyeu"></span>
 		</div>
+	</div>
+	<div class="row section ads ads_type1" ng-if="ads.length > 2">
+		<slick infinite=true slides-to-show=1 slides-to-scroll=1 settings="slickConfig" style="height: 100%;">
+	    	<div class="ads_container" ng-repeat="(key, value) in [].constructor(Math.floor(ads.length/3)) track by $index" style="display: flex !important">
+				<div class="ads_content" ng-if="ads[key]">
+					<div class="col-md-1 full_height d_flex v_center">
+						<div class="discount">
+							<span>-{{100 - ads[key].price/ads[key].old_price*100 | number: 0}}</span><span>%</span>
+						</div>
+					</div>
+					<div class="col-md-8 full_height d_flex v_center">
+						<div class="d_flex" style="flex-direction: row">
+							<div class="ads_img">
+								<img class="img_150" ng-src="/images/ads/{{ads[key].img_100}}">
+							</div>
+							<div style="padding-left: 30px">
+								<h3 style="font-weight: 700;color:#000">{{ads[key].name}} tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
+								<div style="line-height: 1.2;font-size: 14px;margin-bottom: 10px;">{{ads[key].desc}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 full_height d_flex v_center">
+						<div class="d_flex" style="flex-direction: row">
+							<div style="padding-left: 30px; text-align: center">
+								<div>Giá cũ: <span style="font-weight: 700;text-decoration: line-through;">{{ads[key].old_price | number: 0}} đ</span></div>
+								<h1 style="font-weight: 700;color:#ef1c1c;margin: 0;">{{ads[key].price | number: 0}} đ</h1>
+								<button class="btn btn-danger btn-block">ĐẶT MUA NGAY</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </slick>
+		
 	</div>
 	<div class="row">
 		<div class="block_wl"></div>
@@ -194,6 +234,7 @@
 	<div class="row">
 		<div class="block_wl"></div>
 	</div>
+	
 	<div class="row section section5">
 		<div class="col-md-9">
 			<div class="full_width t_center" style="padding: 15px 30px">
@@ -203,31 +244,33 @@
 		</div>
 		<div class="col-md-3">
 			<div class="row section ads ads_type2" ng-if="ads.length > 2">
-				<div class="ads_container">
-					<div class="ads_content d_flex" style="flex-direction: column;padding: 15px;border: none">
-						<div>
-							<div class="ads_img">
-								<img class="img full_width" ng-src="/images/ads/1000x1000/{{ads[1].img_100}}">
+				<slick infinite=true slides-to-show=1 slides-to-scroll=1 settings="slickConfig" style="height: 100%;">
+					<div class="ads_container" ng-repeat="(key, value) in [].constructor(Math.floor(ads.length/3)) track by $index">
+						<div class="ads_content d_flex" style="flex-direction: column;padding: 15px;border: none">
+							<div>
+								<div class="ads_img">
+									<img class="img full_width" ng-src="/images/ads/1000x1000/{{ads[key+Math.floor(ads.length/3)].img_100}}">
+								</div>
 							</div>
-						</div>
-						<div>
-							<h4 style="font-weight: 700;color:#000">{{ads[1].name}} tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
-							<div>{{ads[1].desc}}</div>
-						</div>
-						<div class="d_count">
-							<span>-68</span><span>%</span>
-						</div>
-						<div class="col-md-3 full_width">
-							<div class="d_flex" style="flex-direction: row">
-								<div class="full_width" style="text-align: center">
-									<div>Giá cũ: <span style="font-weight: 700;text-decoration: line-through;">{{ads[1].old_price | number: 0}} đ</span></div>
-									<h1 style="font-weight: 700;color:#ef1c1c;margin: 10px auto;">{{ads[1].price | number: 0}} đ</h1>
-									<button class="btn btn-danger btn-block">ĐẶT MUA NGAY</button>
+							<div style="line-height: 1.2;font-size: 14px;margin-bottom: 10px;">
+								<h4 style="font-weight: 700;color:#000">{{ads[key+Math.floor(ads.length/3)].name}} tuổi <span style="color:#D94B4B">{{lunarData.am_lich}}</span></h3>
+								<div>{{ads[key+Math.floor(ads.length/3)].desc}}</div>
+							</div>
+							<div class="d_count">
+								<span>-{{100 - ads[key+Math.floor(ads.length/3)].price/ads[key+Math.floor(ads.length/3)].old_price*100 | number: 0}}</span><span>%</span>
+							</div>
+							<div class="col-md-3 full_width">
+								<div class="d_flex" style="flex-direction: row">
+									<div class="full_width" style="text-align: center">
+										<div>Giá cũ: <span style="font-weight: 700;text-decoration: line-through;">{{ads[key+Math.floor(ads.length/3)].old_price | number: 0}} đ</span></div>
+										<h1 style="font-weight: 700;color:#ef1c1c;margin: 10px auto;">{{ads[key+Math.floor(ads.length/3)].price | number: 0}} đ</h1>
+										<button class="btn btn-danger btn-block">ĐẶT MUA NGAY</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</slick>
 			</div>
 		</div>
 	</div>
@@ -272,5 +315,8 @@
 				<span ng-bind-html="selected.section6_hocsinh"></span>
 			</div>
 		</div>
+	</div>
+	<div style="width: 100%;text-align: center;margin: 15px 0">
+		<span>Copyright &copy; 2019 by Tâm An</span>
 	</div>
 </div>

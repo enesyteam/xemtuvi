@@ -1,7 +1,11 @@
 goSua.controller('MainCtrl', ['$rootScope', '$scope', 
-	'$location', '$filter', '$timeout', 'toastr', 'toastrConfig', '$interval', 'MFirebaseService', function( 
+	'$location', '$filter', '$timeout', 'toastr', 'toastrConfig', '$interval', 'MFirebaseService', '$location', function( 
 		$rootScope, $scope, $location, $filter, 
-	$timeout, toastr, toastrConfig, $interval, MFirebaseService ) {
+	$timeout, toastr, toastrConfig, $interval, MFirebaseService, $location ) {
+        $rootScope.currentURL = $location.absUrl();
+        $rootScope.title = 'Xem tử vi 2019 chính xác nhất';
+        $rootScope.description = 'Xem tử vi 2019 miễn phí';
+        $rootScope.ogImage = 'https://vietnammoi.vn/stores/news_dataimages/seovietnews/042018/27/10/3303_tu-vi-thu-hai-tu-vi-tuoi-ty-tu-vi-tuoi-dau-tu-vi-tuoi-suu-1-1.jpg';
 
 	var configToastr = function() {
         toastrConfig.closeButton = false;

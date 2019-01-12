@@ -773,7 +773,7 @@ a.notice__action {
 }
 .ads_content {
 	border-radius: 6px;
-	border: 2px solid #cc2a1e;
+	/*border: 2px solid #cc2a1e;*/
 	height: 100%;
 	width: 100%;
 }

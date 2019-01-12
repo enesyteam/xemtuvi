@@ -4,6 +4,7 @@ var goSua = angular.module('goSua', [
   	'ngSanitize',
     'mFirebase',
     'toastr',
+    'slick',
 	])
     .constant('appVersion', '4.4.0')
     .constant('releaseDate', 'May-20, 2018')
