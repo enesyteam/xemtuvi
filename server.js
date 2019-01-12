@@ -24,6 +24,8 @@ routes = require('./routes');
 
 var app = express();
 
+app.use(require('prerender-node'));
+
 // facebookAuth( app );
 app.use(logger('dev'));
 
