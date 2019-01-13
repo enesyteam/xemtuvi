@@ -219,7 +219,7 @@ body {
 	background-image: url("/images/12-animals/hoi_hover.gif");
 }
 .dynamic_content {
-    z-index: 1;
+    z-index: 0;
     width: 300px;
     height: 150px;
     margin: auto;
@@ -258,6 +258,17 @@ body {
 	width: 60%;
     margin: 0 auto;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .selected .main_content {
+    width: 100%;
+  }
+  .selected .f_input {
+    width: 100%;
+  }
+}
+
 .v_center {
 	align-items: center;
 }
