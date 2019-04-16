@@ -29,14 +29,14 @@
 	============================================= -->
 	<title>{{title}}</title>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132411450-1"></script>
-	<script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132411450-1"></script> -->
+	<!-- <script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 
 	  gtag('config', 'UA-132411450-1');
-	</script>
+	</script> -->
 
 	<style>
       @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500");
@@ -313,10 +313,11 @@ input:focus {
   will-change: background;
 }
 .container .bottom {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 28vh;
+      position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 28vh;
+    top: 400px;
 }
 .container .bottom .nav {
   width: 100%;
@@ -937,7 +938,7 @@ a, a:hover {
 	============================================= -->
 	<div class="full_height clearfix">
 		
-		<div ui-view class="main-view"> </div>
+		<div ui-view class="main-view" style="height: 100%"> </div>
 	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
