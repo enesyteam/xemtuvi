@@ -101,7 +101,7 @@ body {
 
 .clouds{
     background:transparent url(/assets/images/bg.jpg) repeat top center;
-    z-index:0;
+    /*z-index:0;*/
 }
 
 .p_absolute {
