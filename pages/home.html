@@ -1,169 +1,457 @@
-<div class="stars"></div>
-		<div class="twinkling"></div>
-		<div class="clouds"></div>
-
-		<div class="p_absolute z-index-10 {{selectedAge ? 'selected' : ''}}">
-			<div class="container full_height clearfix">
-				<div class="d_table full_height full_width t_center">
-					<div class="d_table_cell">
-						<div class="main_content bg_white">
-							<div class="p_absolute dynamic_content d_flex v_center full_height {{selectedAge ? 'selected' : ''}} d_flex v_center">
-								<div class="full_width d_flex v_center">
-									<div ng-if="!selectedAge" class="hidden-sm-down">
-										<h1 class="main_title" style="font-weight: 700;">XEM TỬ VI 2019</h1>
-										<p class="sub_title">Vui lòng chọn tuổi của bạn!</p>
-									</div>
-									<div ng-if="selectedAge && !loading" class="full_width full_height white">
-										<h3 class="">Tử vi tuổi <strong>{{getAgeName(selectedAge)}}</strong></h3>
-										<p class="sub_title">Vui lòng nhập ngày sinh dương lịch!</p>
-										<div class="f_input">
-											<form>
-												<div class="form-group row">
-												    <label for="inputDate" class="col-sm-4 col-xs-6 col-form-label">Họ tên:</label>
-												    <div class="col-sm-8 col-xs-6">
-												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập Họ và tên bạn" ng-model="data.name">
-												    </div>
-											  	</div>
-												<div class="form-group row">
-												    <label for="inputDate" class="col-sm-4 col-xs-6 col-form-label">Ngày:</label>
-												    <div class="col-sm-8 col-xs-6">
-												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập ngày sinh" ng-model="data.day">
-												    </div>
-											  	</div>
-											  	<div class="form-group row">
-												    <label for="inputDate" class="col-sm-4 col-xs-6 col-form-label">Tháng:</label>
-												    <div class="col-sm-8 col-xs-6">
-												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập tháng sinh" ng-model="data.month">
-												    </div>
-											  	</div>
-											  	<div class="form-group row">
-												    <label for="inputDate" class="col-sm-4 col-xs-6 col-form-label">Năm:</label>
-												    <div class="col-sm-8 col-xs-6">
-												      <input type="text" class="form-control input-lg" id="inputDate" placeholder="Nhập năm sinh" ng-model="data.year">
-												    </div>
-											  	</div>
-											  	<div class="row" style="padding-bottom: 20px;">
-											      <div class="col-sm-4 col-xs-6">
-											      	Giới tính:
-											      </div>
-											      <div class="col-sm-8 col-xs-6"  style="float: none;">
-											        <div class="form-check form-check-inline">
-											          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="data.gender" value="male">
-											          <label class="form-check-label" for="gridRadios1">
-											            Nam
-											          </label>
-											        </div>
-											        <div class="form-check form-check-inline" style="margin-left: 20px;">
-											          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="data.gender" value="female">
-											          <label class="form-check-label" for="gridRadios2">
-											            Nữ
-											          </label>
-											        </div>
-											      </div>
-											    </div>
-											  	<div class="row">
-											  		<div class="col-sm-4 col-xs-6">
-											  			<button ng-click="resetSelectedAge()" type="button" class="btn btn-danger btn-lg btn-block">Trở về</button>
-											  		</div>
-											  		<div class="col-sm-8 col-xs-6">
-											  			<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="submitDate()">Xem tử vi</button>
-											  		</div>
-											  	</div>
-											</form>
-										</div>
-									</div>
-									<div class="waiting_screen full_width" ng-if="loading">
-								  		<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-								  		<div class="white">
-								  			<h3>
-								  				<strong>Đang xử lý thông tin...</strong>
-								  			</h3>
-								  			<div>
-								  				Vui lòng chờ trong giây lát!
-								  			</div>
-								  		</div>
-								  	</div>
-								</div>
-							</div>
-							<div class="fix_content">
-								<div class="row h_100 full_width">
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('tys')">
-											<div class="animal_img tys"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('suu')">
-											<div class="animal_img suu"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('dan')">
-											<div class="animal_img dan"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('mao')">
-											<div class="animal_img mao"></div>
-										</div>
-									</div>
-								</div>
-								<div class="row h_100 full_width">
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('thin')">
-											<div class="animal_img thin"></div>
-										</div>
-									</div>
-									<div class="col-md-6 col-xs-4 d_table_cell full_height">
-										
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('tyj')">
-											<div class="animal_img tyj"></div>
-										</div>
-									</div>
-								</div>
-								<div class="row h_100 full_width">
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('ngo')">
-											<div class="animal_img ngo"></div>
-										</div>
-									</div>
-									<div class="col-md-6 col-xs-4 d_table_cell full_height">
-										
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('mui')">
-											<div class="animal_img mui"></div>
-										</div>
-									</div>
-								</div>
-								<div class="row h_100 full_width">
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('than')">
-											<div class="animal_img than"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('dau')">
-											<div class="animal_img dau"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('tuat')">
-											<div class="animal_img tuat"></div>
-										</div>
-									</div>
-									<div class="col-md-3 col-xs-4 d_table_cell full_height">
-										<div class="animal full_height t_center" ng-click="ageClick('hoi')">
-											<div class="animal_img hoi"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- Best on mobile with Gesture -->
+<div class="container" id="mobile_control">
+   <div class="menu">
+      <span class="close"><i class="material-icons">close</i></span>
+   </div>
+   <div class="content">
+   		<h3 class="sub-neon">XEM TỬ VI CHUẨN 2019</h3>
+      <h1 class="title">TÝ</h1>
+      <div class="helmet">
+         <!-- <img ondragstart="return false;" src="https://downloadsach.com/wp-content/uploads/2018/03/sach-day-xem-tu-vi.jpg"/> -->
+         <div class="planet_position">
+            <div class="planet_shadow"></div>
+            <div class="planet_photo"></div>
+         </div>
+      </div>
+      <div class="nav" style="position: absolute;top:50%;display: flex;width:100%;z-index: 1">
+         <span id="next" class="action" style="margin-right: auto;"><i class="material-icons" style="font-size: 100px">keyboard_arrow_left</i></span>
+         <span id="prev" class="action"><i class="material-icons" style="font-size: 100px">keyboard_arrow_right</i></span>
+      </div>
+   </div>
+   <div class="bottom">
+      <div class="orbit">
+         <div class="planet_container">
+            <div class="planet pt earth" id="pl0">
+               <div class="moon">
+                  <span></span>
+               </div>
+            </div>
+            <div class="planet mars" id="pl1">
+               <div class="moon">
+                  <span></span>
+                  <span></span>
+               </div>
+            </div>
+            <div class="planet jupiter" id="pl2"></div>
+            <div class="planet saturn" id="pl3">
+              
+            </div>
+            <div class="planet uranus" id="pl4"></div>
+            <div class="planet neptune" id="pl5"></div>
+            <div class="planet mercury" id="pl6"></div>
+            <div class="planet venus" id="pl7"></div>
+            <div class="planet mui" id="pl8"></div>
+            <div class="planet than" id="pl9"></div>
+            <div class="planet dau" id="pl10"></div>
+            <div class="planet tuat" id="pl11"></div>
+            <div class="planet hoi" id="pl12"></div>
+         </div>
+         <div class="name_container">
+            <p class="pn">TUỔI TÝ</p>
+            <div style="display: flex;flex-direction: row">
+            	<div ng-if="currentStep===1" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
+	            	<div style="color: #fff">
+	            		Vui lòng điền họ tên đầy đủ để xem tử vi
+	            	</div>
+	            	<div style="margin-top: 15px">
+	            		<input class="text-input" type="text" name="" placeholder="Nhập họ tên bạn" ng-model="customerData.name">
+	            	</div>
+	            	<div style="margin-top: 15px">
+	            		<button class="button" ng-click="goToStep2()" ng-disabled="!customerData.name || customerData.name.length === 0">
+	            			Tiếp tục
+	            			<i class="material-icons">keyboard_arrow_right</i>
+	            		</button>
+	            	</div>
+	            </div>
+	            <div ng-if="currentStep===2" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
+	            	<div style="color: #fff">
+	            		Ngày tháng năm sinh của bạn.
+	            	</div>
+	            	<div style="margin-top: 15px;display: flex;flex-direction: row">
+	            		<div style="display: flex;flex-direction: row">
+	            			
+	            			<input class="text-input short" type="text" name="" placeholder="Ngày" ng-model="customerData.day">
+	            		</div>
+	            		<div style="display: flex;flex-direction: row">
+	            			
+	            			<input class="text-input short" type="text" name="" placeholder="Tháng" ng-model="customerData.month">
+	            		</div>
+	            		<div style="display: flex;flex-direction: row">
+	           
+	            			<input class="text-input short" type="text" name="" placeholder="Năm" ng-model="customerData.year">
+	            		</div>
+	            	</div>
+	            	<div style="margin-top: 15px">
+	            		<button class="button" ng-click="goToStep3()" ng-disabled="!customerData.name || customerData.name.length === 0">
+	            			Tiếp tục
+	            			<i class="material-icons">keyboard_arrow_right</i>
+	            		</button>
+	            	</div>
+	            </div>
+	            <div ng-if="currentStep===3" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
+	            	<div style="color: #fff">
+	            		Hãy chọn giới tính.
+	            	</div>
+	            	<div style="margin-top: 15px;display: flex;flex-direction: row">
+	            		<div style="display: flex;flex-direction: row">
+	            			
+	            			<label>
+                      <input type="radio" ng-model="customerData.gender" value="nam">
+                      Nam
+                    </label>
+                    <label style="margin-left: 15px">
+                      <input type="radio" ng-model="customerData.gender" value="nữ">
+                      Nữ
+                    </label>
+	            		</div>
+	            	</div>
+	            	<div style="margin-top: 15px">
+	            		<button class="button" ng-click="goToStep4()" ng-disabled="!customerData.name || customerData.name.length === 0">
+	            			Xem tử vi
+	            			<i class="material-icons">keyboard_arrow_right</i>
+	            		</button>
+	            	</div>
+	            </div>
+	            <div ng-if="currentStep===4" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
+	            	<div style="color: #fff">
+	            		{{ ready ? 'Xử lý thông tin đã xong. Kết quả cho bạn thật bất ngờ!' : 'Xin vui lòng đợi trong giây lát. Lá số tử vi của bạn đang được lập...' }}
+	            	</div>
+	            	<div style="margin-top: 15px;" ng-if="!ready">
+	            		<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+	            	</div>
+	            	<button style="margin-top: 15px;" class="button jackInTheBox" ng-if="ready" ng-click="final()">
+            			Xem ngay
+            			<i class="material-icons">keyboard_arrow_right</i>
+            		</button>
+	            </div>
+            </div>
+            <!-- <p class="more">XEM TỬ VI</p> -->
+         </div>
+      </div>
+   </div>
+</div>
+<div class="carousel bounceInUp fullInfo" ng-if="displayInfo">
+	<div class="infoContainer">
+		<div class="citem active" id="p0">
+	         <h1>Số tử vi của bạn đã hoàn tất</h1>
+	         <div>
+	         	<img class="infoImg" src="/assets/images/image56154.png">
+	         </div>
+	         <p>
+	         	Xin chúc mừng {{getInfo().name}} ! <strong>Tuổi {{getInfo().age}}</strong> của bạn cùng 2 tuổi khác chính là 3 con giáp được chọn để hưởng lộc đầu năm 2019! Tiền tài trong 3 tháng đầu năm sẽ liên tục ập đến với bạn theo lá số tử vi, nhưng chỉ khi bạn biết đúng cách để nắm bắt nó.
+	         </p>
+	         <p>
+	         	Công việc, sự nghiệp, tiền tài ở nửa đầu năm 2019 của người <strong>Tuổi {{getInfo().age}}</strong> như bạn thường bị cản trở bởi việc thiếu nhiều nguồn lực hỗ trợ, vận xui đeo bám và điều này dẫn tới sự thất vọng, không may mắn. Các chuyên gia tâm linh đã chứng minh được rằng con người cần có một vật mang giá trị tâm linh ở bên cạnh mình và đó là một chiếc vòng hộ mệnh Money Amulet, để thu hút may mắn, tiền tài lẫn sự thịnh vượng. Chiếc vòng này được tin tưởng rằng nó sẽ mở lối cho tất cả các dòng năng lượng tiền tài và cho phép bạn có được những gì mà bạn xứng đáng. Money Amulet đã tồn tại qua rất nhiều thế kỷ và cho đến hiện nay nó vẫn có hiệu lực vô cùng thần kỳ. Điều này đã được chứng minh bởi rất nhiều phản hồi của người giàu có , những người có mang theo vòng hộ mệnh. Thậm trí có cả những truyền thuyết từ xa xưa được kể lại cho đến ngày nay, rằng là các vị vua chúa ở châu Âu đã sử dụng <a href="http://www.phongthuy86.biz/">Money Amulet</a> như một vòng hộ mệnh cho bản thân và quốc gia, Vô cùng kỳ diệu.
+	         </p>
+	         <p>
+	         	Sư thầy Dhammachayo trụ chì chùa Wat Mahathat ở Thái Lan cho rằng <strong>Tuổi {{getInfo().age}}</strong> - không phải là tuổi giàu lên từ việc làm công ăn lương, mà bản chất là tuổi của những người có thể giàu lên trong chớp mắt từ kinh doanh tự do hoặc may mắn, nhưng phải có duyên và bắt buộc phải làm theo quy luật đơn giản - đeo <a href="http://www.phongthuy86.biz/">Money Amulet</a> Nhờ có Money Amulet bạn sẽ có tiền, không có ngày đen đủi, nó sẽ bảo vệ bạn khỏi rủi ro và sự ghen tị. May mắn sẽ luôn theo bạn khắp nơi. Mọi thứ sẽ kết thúc thành công và đúng hẹn.
+	         </p>
+	         <p>
+	         	Ngoài ra, <strong>Tuổi {{getInfo().age}}</strong> cũng sẽ gặp nhiều TRẮC TRỞ lớn - nhưng chính nhất sẽ đến từ sự ghen tị và đố kị của những người xung quanh. Chính vì vậy, khi đeo hoặc giữ vòng hộ mệnh Money Amulet bên người, bạn phải giấu kín trong ví, hoặc không đeo trên cổ mà cho ra ngoài áo bạn mặc. Kiêng kị nhất mà sư thầy thường căn dặn đó là không để người khác nhìn thấy mặt trước của Money Amulet, và tuyệt đối không để ai khác sờ vào lá vòng của chính bạn. Thường thường, bạn bè và người quen sẽ ganh tị với sự may mắn của bạn, điều đó có thể trù ẻo dẫn đến sự may mắn quay lưng với bạn MÃI MÃI và tiền tài sẽ biến mất khỏi cuộc đời bạn. Vòng hộ mệnh <a href="http://www.phongthuy86.biz/">Money Amulet</a> được thỉnh từ Thái Lan không chỉ xóa tan vận xuôi còn thu hút may mắn, tài lộc và sức khỏe.
+	         </p>
+	      </div>
+	      
+          <a href="http://www.phongthuy86.biz/">
+            <div style="background: red" class="btnOrder">
+              THỈNH NGAY BÙA MONEY AMULET
+            </div>
+          </a>
+	     
+	      <div class="citem" id="p1">
+	         <h1>ĐIỀU GÌ KHIẾN MỌI NGƯỜI ĐỔ XÔ ĐI MUA MONEY AMULET?</h1>
+	         Nhờ có vòng hộ mệnh này mà:
+	          <ul>
+	            <li>Bạn sẽ được mời làm việc có lương cao,</li>
+	            <li>người nợ sẽ trả tiền,</li>
+	            <li> có cơ hội thăng tiến;</li>
+	            <li> Sẽ có may mắn trong việc tiền bạc theo bạn; </li>
+	            <li> May mắn trong tất cả các lần thử làm giàu;</li>
+	            <li> Thành công bất ngờ trong kinh doanh.</li>
+	         </ul>
+	         <p>
+	         	Giờ đây, nhờ có chiếc vòng này mà có thể có phúc và lộc cả đời . Giữ Money Amulet trong người bạn gần như sẽ không thể mất dòng phúc lộc này trong 3 tháng đầu năm, ngay cả nếu như rất muốn.
+	         </p>
+	      </div>
+	      <div class="citem" id="p2">
+	         <h1>Phép màu của Money Amulet</h1>
+	         <p>
+	         	Chị L.T.Q.T ở Trà Vinh đã trúng xổ số Vietlott với giải thưởng hơn 16 tỷ trong lần đầu tiên cô ấy thử vận may với Money Amulet. Cô ấy là người không nhận được nhiều may mắn trong cuộc sống, gia đình đông con, nghèo khổ, bố mất sớm. Cuộc đời cô ấy từ khi còn trẻ đã trải qua nhiều khổ cực mà không phải ai cũng hiểu được, cho đến khi trưởng thành cô ấy không có gì trong tay. Thậm trí còn bị người ta hành hạ, khinh bỉ, sỉ nhục khi làm thuê cho một tiệm cắt tóc. Chỉ khi cô ấy được bà bói đưa cho đồng tiền <a href="http://www.phongthuy86.biz/">Money Amulet</a> , chuỗi ngày đen tối mới thực sự kết thúc. Với số tiền hơn 16 tỷ đồng, cô ấy bắt tay xây dựng lại cuộc sống sung túc, đẩy đủ hơn bên cạnh mẹ và các em. Hiện tại cô ấy đã lấy được một người chồng tốt và kinh doanh khách sạn 5 sao trên thành phố. Money Amulet là một trong những bí mật mà cô ấy giữ rất nhiều năm qua, chỉ trong một lần đi từ thiện ở chùa, cô ấy mới tiết lộ.
+	         </p>
+	         <div>
+	         	<img class="infoImg" src="/assets/images/image74684.png">
+	         </div>
+	         <p>
+	         	<strong>
+	         		Ai thấy hứng thú thì có thể đặt <a href="http://www.phongthuy86.biz/">Money Amulet</a> ở đây. Hãy mua thỉnh ngay cho mình 1 chiếc Vòng hộ mệnh Money Amulet để thu hút cực mạnh tiền tài về phía mình. Hút tiền tài chuẩn bị cho Tết sắp tới. Chúc các bạn may mắn!
+	         	</strong>
+	         </p>
+	         <p>
+	         	Cám ơn tất cả vì đã đọc bài viết!
+	         </p>
+           <a href="http://www.phongthuy86.biz/">
+            <div style="background: red" class="btnOrder">
+              GIẢM GIÁ 50% CHO NGƯỜI ĐÃ XEM TỬ VI
+            </div>
+          </a>
+	      </div>
+	      <div class="citem" id="p3">
+	         <div class="fbComments" ng-include="'/pages/comment.html'"></div>
+	      </div>
+	</div>      
+</div>
+<script id="rendered-js">
+   //ISPIRATION: https://www.uplabs.com/posts/xore-solar-system
+   //Full page simoberny.it
+   //Best on mobile
+   
+   /* Inizializzazione HammerJS */
+   var element = document.getElementById('mobile_control');
+   var hammertime = new Hammer(element);
+   
+   var swiped_top = false;
+   
+   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+   hammertime.on('swipeleft', function(ev) {
+   cmove("prev");
+   });
+   hammertime.on('swiperight', function(ev) {
+   cmove("next");
+   });
+   hammertime.on('swipeup', function(ev) {
+   swiped_top = true;
+   openmodal();
+   });
+   hammertime.on('swipedown', function(ev) {
+   closemodal();
+   });
+   /* * * * * * * * * */
+   
+   $(".action").on("click", function(){
+   cmove($(this).attr('id'));
+   });
+   
+   $('.title').each(function(){
+   $(this).html("tUỔI TÝ".replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+   });
+   
+   
+   anime.timeline({})
+   .add({
+   targets: '.title',
+   opacity: [0,1],
+   easing: "easeOutExpo",
+   duration: 100
+   })
+   .add({
+   targets: '.title .letter',
+   translateX: [40,0],
+   translateZ: 0,
+   opacity: [0,1],
+   easing: "easeOutExpo",
+   duration: 1200,
+   delay: function(el, i) {
+     return 500 + 30 * i;
+   }
+   });
+   
+   var angle = 0;
+   var planet_id = 0;
+   window.currentAgeId = 0;
+   
+   function cmove(dir){
+   var n_planet = 12, next_id;
+   var prev, next;
+   var top = $("#pl"+ planet_id);
+   var orbit = $(".planet_container");
+   
+   top.removeClass("pt");
+   
+   if(planet_id == 0){
+     prev = $("#pl"+ (n_planet-1));
+     next = $("#pl"+ (planet_id+1)%n_planet);
+   }else{
+     prev = $("#pl"+ (planet_id-1));
+     next = $("#pl"+ (planet_id+1)%n_planet);
+   }
+   
+   if(dir == "prev"){
+     next_id = (planet_id + 1) % n_planet;
+     angle -= 45;
+     next.addClass("pt");
+     planet_id++;
+   }else{
+     if(planet_id == 0){
+       next_id = 11;
+       planet_id = 11;
+     }else{
+       next_id = planet_id-1;
+       --planet_id;
+     }
+     angle += 45;
+     prev.addClass("pt");
+   }
+   
+   $(".active").removeClass("active");
+   $("#p" + planet_id).addClass("active");
+   $(".info_back h1").text(planet[next_id]);
+   
+   if(swiped_top){
+     $('.info_back h1').each(function(){
+       $(this).html(planet[planet_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+     });
+     
+     anime.timeline({})
+     .add({
+       targets: '.info_back h1',
+       opacity: [0,1],
+       easing: "easeOutExpo",
+       duration: 100
+     })
+     .add({
+       targets: '.info_back h1 .letter',
+       translateX: [40,0],
+       translateZ: 0,
+       opacity: [0,1],
+       easing: "easeOutExpo",
+       duration: 1200,
+       delay: function(el, i) {
+         return 500 + 30 * i;
+       }
+     });
+   }
+   
+   $('.title').each(function(){
+     $(this).html(planet[next_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+   });
+   
+   anime.timeline({})
+   .add({
+     targets: '.title .letter',
+     translateX: [40,0],
+     translateZ: 0,
+     opacity: [0,1],
+     easing: "easeOutExpo",
+     duration: 1200,
+     delay: function(el, i) {
+       return 500 + 30 * i;
+     }
+   });
+   
+   $('.pn').each(function(){
+     $(this).html(planet[next_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+   });
+   
+   anime.timeline({})
+   .add({
+     targets: '.pn .letter',
+     translateX: [40,0],
+     translateZ: 0,
+     opacity: [0,1],
+     easing: "easeOutExpo",
+     duration: 1200,
+     delay: function(el, i) {
+       return 500 + 30 * i;
+     }
+   });
+   
+   var ani_dir = (dir == "next") ? "0%" : "100%";
+   
+   anime.timeline({})
+   .add({
+     targets: '.planet_photo',
+     opacity: {
+       value: [1,0]
+     },
+     duration: 700,
+     easing: 'easeOutQuad',
+     complete: function(anim){
+     	window.currentAgeId = planet_id;
+       $(".planet_photo").css("background-image", "url(" + photo_planet[next_id] +")"); 
+     }
+   })
+   .add({
+     targets: '.planet_photo',
+     opacity: [0.2,1],
+     duration: 500,
+     easing: 'easeOutQuad'
+   });
+   
+   $(".info_back").css("background-image", "url(" + photo_planet[next_id] +")");
+   orbit.css("transform", "rotateZ(" + angle + "deg)");
+   }
+   
+   $("#open_menu").on("click", function(){
+   $(".menu").show();
+   });
+   
+   $(".close").on("click", function(){
+   $(".menu").hide();
+   });
+   
+   $(".more").on("click", function(){
+   swiped_top = true;
+   openmodal();
+   });
+   
+   function openmodal(){
+   anime.timeline({})
+   .add({
+     targets: '.carousel',
+     translateY: ["100%", 0],
+     duration: 600,
+     easing: 'easeOutQuad',
+   });
+   
+     $('.info_back h1').each(function(){
+       $(this).html(planet[planet_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+     });
+     
+     anime.timeline({})
+     .add({
+       targets: '.info_back h1',
+       opacity: [0,1],
+       easing: "easeOutExpo",
+       duration: 100
+     })
+     .add({
+       targets: '.info_back h1 .letter',
+       translateX: [40,0],
+       translateZ: 0,
+       opacity: [0,1],
+       easing: "easeOutExpo",
+       duration: 1200,
+       delay: function(el, i) {
+         return 500 + 30 * i;
+       }
+     });
+   }
+   
+   function closemodal(){
+   if(swiped_top){
+     anime.timeline({})
+     .add({
+       targets: '.carousel',
+       translateY: [0, "100%"],
+       duration: 600,
+       easing: 'easeOutQuad',
+     });
+     swiped_top = false;
+   }
+   }
+   
+   var photo_planet = [
+   "/assets/images/12giap/ti.png",
+   "/assets/images/12giap/suu.png",
+   "/assets/images/12giap/dan.png",
+   "/assets/images/12giap/mao.png",
+   "/assets/images/12giap/thin.png",
+   "/assets/images/12giap/tyj.png",
+   "/assets/images/12giap/ngo.png",
+   "/assets/images/12giap/mui.png",
+   "/assets/images/12giap/than.png",
+   "/assets/images/12giap/dau.png",
+   "/assets/images/12giap/tuat.png",
+   "/assets/images/12giap/hoi.png"
+   ];
+   var planet = ["TUỔI TÝ", "TUỔI SỬU", "TUỔI DẦN", "TUỔI MÃO", "TUỔI THÌN", "TUỔI TỴ", "TUỔI NGỌ", "TUỔI MÙI", "TUỔI THÂN", "TUỔI DẬU", "TUỔI TUẤT", "TUỔI HỢI"];
+</script>

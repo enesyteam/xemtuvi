@@ -1,6 +1,6 @@
 goSua.controller('MainCtrl', ['$rootScope', '$scope', 
-	'$location', '$filter', '$timeout', 'toastr', 'toastrConfig', '$interval', 'MFirebaseService', '$location', function( 
-		$rootScope, $scope, $location, $filter, 
+	'$location', '$window', '$filter', '$timeout', 'toastr', 'toastrConfig', '$interval', 'MFirebaseService', '$location', function( 
+		$rootScope, $scope, $location, $window, $filter, 
 	$timeout, toastr, toastrConfig, $interval, MFirebaseService, $location ) {
         $rootScope.currentURL = $location.absUrl();
         $rootScope.title = 'Xem tử vi 2019 chính xác nhất';
@@ -328,4 +328,104 @@ goSua.controller('MainCtrl', ['$rootScope', '$scope',
     		$location.path( '/xem-tu-vi/ngay=' + data.day + '&thang=' + data.month + '&nam=' + data.year + '&gioitinh=' + data.gender + '&amlich=' +  data.lunar_year + '&name=' + data.name);
     	}, 3000);
     }
+
+    $scope.ageShort = [
+        'tys',
+        'suu',
+        'dan',
+        'mao',
+        'thin',
+        'tyj',
+        'ngo',
+        'mui',
+        'than',
+        'dau',
+        'tuat',
+        'hoi'
+    ];
+
+    $scope.customerData = {
+        name: '',
+        day: null,
+        month: null,
+        year: null,
+        gender: 1,
+    }
+
+    $scope.currentStep = 1;
+    $scope.transforming = false;
+
+    $scope.goToStep2 = function() {
+        // var currentAgeId = $window.currentAgeId;
+        // var age = $scope.ageShort[ currentAgeId ]
+        // console.log("age", age);
+        // console.log($scope.customerData);
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.transforming = true;
+            })
+        }, 500);
+
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.currentStep = 2;
+                $scope.transforming = false;
+            })
+        }, 500);
+    }
+
+    $scope.goToStep3 = function() {
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.transforming = true;
+            })
+        }, 500);
+
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.currentStep = 3;
+                $scope.transforming = false;
+            })
+        }, 500);
+    }
+
+    $scope.goToStep4 = function() {
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.transforming = true;
+            })
+        }, 500);
+
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.currentStep = 4;
+                $scope.transforming = false;
+            })
+        }, 500);
+
+        setTimeout(function() {
+            $scope.$apply(() => {
+                $scope.ready = true;
+            })
+        }, 3000);
+    }
+
+    $scope.displayInfo = false;
+
+    $scope.final = function() {
+        $scope.displayInfo = true;
+    }
+
+    $scope.getInfo = function() {
+        var currentAgeId = $window.currentAgeId;
+        var age = $scope.ageShort[ currentAgeId ];
+
+        var s = age ? $scope.getAgeName( age ) : null;
+
+        return Object.assign($scope.customerData, {
+            age: s,
+            shortAge: age,
+        });
+    }
+
 } ])
