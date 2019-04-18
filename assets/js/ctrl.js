@@ -1,8 +1,17 @@
-goSua.controller('MainCtrl', ['$rootScope', '$scope', 
-	'$location', '$window', '$filter', '$timeout', 'toastr', 'toastrConfig', '$interval', 'MFirebaseService', '$location', function( 
+goSua.controller('MainCtrl', function( 
 		$rootScope, $scope, $location, $window, $filter, 
-	$timeout, toastr, toastrConfig, $interval, MFirebaseService, $location ) {
-        $rootScope.currentURL = $location.absUrl();
+	$timeout, toastr, toastrConfig, $interval, MFirebaseService, $location, $state, $stateParams ) {
+
+    $scope.content = $stateParams.content;
+    // $scope.detailPage = "detail-1.html";
+
+    // switch($stateParams.content) {
+    //     case "amulet1":
+    //         console.log('will display page 1');
+    //         break;
+    //     default:
+    // }
+        //$rootScope.currentURL = $location.absUrl();
         $rootScope.title = 'Xem tử vi 2019 chính xác nhất';
         $rootScope.description = 'Xem tử vi 2019 miễn phí';
         $rootScope.ogImage = 'https://vietnammoi.vn/stores/news_dataimages/seovietnews/042018/27/10/3303_tu-vi-thu-hai-tu-vi-tuoi-ty-tu-vi-tuoi-dau-tu-vi-tuoi-suu-1-1.jpg';
@@ -428,4 +437,4 @@ goSua.controller('MainCtrl', ['$rootScope', '$scope',
         });
     }
 
-} ])
+} )

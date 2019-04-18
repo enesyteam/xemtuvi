@@ -16,14 +16,15 @@ var goSua = angular.module('goSua', [
 
     	$stateProvider
     		.state( 'home', {
-    			url: '/',
+    			url: '/c=:content',
     			controller: 'MainCtrl',
+                params     : { content: null},
     			templateUrl: '/pages/home.html'
     		} )
 	    	.state('detail', {
-	            url: '/xem-tu-vi/ngay=:day&thang=:month&nam=:year&gioitinh=:gender&amlich=:lunarYear&name=:name',
+	            url: '/c=:content/a=:age/n=:name/detail',
 	            controller: 'DetailCtrl',
-	            params     : { day: null, month : null, year: null, gender: null, lunarYear: null, name: null},
+                params     : { age: null},
 	            templateUrl: '/pages/detail.html'
 	        })
     })
