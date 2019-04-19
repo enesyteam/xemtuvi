@@ -1,934 +1,944 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US" ng-app="goSua">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="Cá Cơm" />
-    <!-- <meta name="fragment" content="!"> -->
-    <!-- <base href="/"> -->
-    <meta property="fb:app_id" content="1085772744867580" />
-    <meta property="og:url"           content="{{currentURL}}" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{{title}}" />
-    <meta property="og:description"   content="{{description}}" />
-    <meta property="og:image"         content="{{ogImage}}" />
-    <!-- Stylesheets
-    ============================================= -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-    <link class="next-head" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=vietnamese" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/fb.css" type="text/css" />
-    <link rel="stylesheet" href="/assets/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-    <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
-    <link rel="stylesheet" href="node_modules/slick-carousel/slick/slick.css">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
-    <!-- Document Title
-    ============================================= -->
-    <title>{{title}}</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135514366-2"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-135514366-2');
-    </script>
-    <style>
-    @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500");
-    * {
-    box-sizing: border-box;
-    margin: 0;
-    }
-    html, body {
-    background: white;
-    /*height: 100%;*/
-    overflow-y: auto;
-    overflow-x: hidden;
-    font-family: 'Montserrat', helvetica, arial, sans-serif;
-    }
-    .button {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    height: 46px;
-    /* width: 150px; */
-    /* text-align: center; */
-    border-radius: 50px;
-    padding: 0 30px;
-    background: #3367af;
-    color: #fff;
-    outline: none;
-    border: none;
-    }
-    button:disabled,
-    button[disabled]{
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-    }
-    .text-input {
-    padding: 0 15px;
-    border-radius: 30px;
-    height: 36px;
-    }
-    .text-input.short {
-    width: 120px;
-    }
-    input,
-    input:focus {
-    border: none;
-    outline: none;
-    }
-    .container {
-    position: relative;
-    display: block;
-    width: 100vmin;
-    height: 100%;
-    margin: auto;
-    z-index: 100;
-    }
-    .container .carousel {
-    position: absolute;
-    background: black;
-    /*-webkit-transform: translateY(-150%);
-    transform: translateY(-150%);*/
-    will-change: transform;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    }
-    .container .carousel .info_back {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 13vh;
-    z-index: 30;
-    background-position: center 2%;
-    background-size: cover;
-    background-image: url("https://i.kinja-img.com/gawker-media/image/upload/s--gBFsZfZv--/c_scale,fl_progressive,q_80,w_800/18mozgxwgu2ibjpg.jpg");
-    text-align: center;
-    }
-    .container .carousel .info_back h1 {
-    text-align: center;
-    color: white;
-    margin-top: 1vh;
-    font-weight: 300;
-    font-size: 3vh;
-    text-transform: uppercase;
-    letter-spacing: 15px;
-    opacity: 0;
-    }
-    .container .carousel .info_back h1 .letter {
-    display: inline-block;
-    line-height: 1em;
-    opacity: 0;
-    }
-    .container .carousel .info_back:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: linear-gradient(transparent, black);
-    opacity: 1;
-    }
-    .container .carousel .active {
-    display: block !important;
-    }
-    .container .carousel .citem {
-    display: none;
-    background: white;
-    width: 100%;
-    height: 100%;
-    text-align: justify;
-    transition: all 0.4s;
-    }
-    .nav .action {
-    cursor: pointer;
-    color: #fff;
-    }
-    .nav .action:hover {
-    color: #888;
-    }
-    .container .carousel .citem h1 {
-    color: black;
-    font-weight: 400;
-    /*margin-top: 15vh;*/
-    padding: 2vmin 7vmin;
-    display: block;
-    width: 100%;
-    background: #eee;
-    }
-    .sub-neon {
-    padding-top: 30px;
-    font-size: 32px;
-    color: #c6e2ff;
-    animation: neon .08s ease-in-out infinite alternate;
-    }
-    .container .carousel .citem p {
-    color: #777;
-    font-size: 15px;
-    padding: 20px 7vmin;
-    }
-    .container .carousel .citem p span {
-    color: #555;
-    font-size: 19px;
-    display: block;
-    padding: 15px 0;
-    }
-    .container .carousel .citem ul {
-    color: #777;
-    padding: 0 12vmin;
-    }
-    .container .menu {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    background: white;
-    display: none;
-    }
-    .container .menu .close {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    }
-    .container .fixed_banner {
-    position: absolute;
-    width: 100%;
-    z-index: 5;
-    }
-    .container .fixed_banner i {
-    position: absolute;
-    right: 25px;
-    top: 25px;
-    font-size: 30px;
-    cursor: pointer;
-    }
-    .container .content {
-    position: relative;
-    width: 100%;
-    height: 73vh;
-    text-align: center;
-    }
-    .container .content .title {
-    font-weight: 300;
-    font-size: 5.8vh;
-    color: #ccc;
-    letter-spacing: 15px;
-    text-transform: uppercase;
-    padding-top: 2vh;
-    opacity: 0;
-    }
-    .container .content .title .letter {
-    display: inline-block;
-    line-height: 1em;
-    opacity: 0;
-    color: #fff;
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
-    text-align: center;
-    }
-    .container .content .helmet {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 9vmin;
-    }
-    .container .content .helmet img {
-    position: absolute;
-    width: 58vmin;
-    margin: auto;
-    top: 12vmin;
-    bottom: 0vmin;
-    left: 0;
-    right: 0;
-    user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    }
-    .container .content .helmet .planet_position {
-    position: absolute;
-    width: 37vmin;
-    height: 37vmin;
-    background: black;
-    box-shadow: 0 10px 20px 10px black;
-    border-radius: 50%;
-    margin: auto;
-    top: 0;
-    bottom: 12vmin;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    overflow: hidden;
-    }
-    .container .content .helmet .planet_position .planet_shadow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 0 -1.5vmax 3vmax 1.2vmax black;
-    border-radius: 50%;
-    z-index: 0;
-    background-image: url(https://cdn6.aptoide.com/imgs/4/5/a/45aaf487cec90d54e6e94cbd2ce79d69_icon.png?w=240);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    /* background-blend-mode: multiply; */
-    opacity: 0.15;
-    }
-    .container .content .helmet .planet_position .planet_photo {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("/assets/images/12giap/ti.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 65%;
-    z-index: 1;
-    will-change: background;
-    }
-    .container .bottom {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 28vh;
-    }
-    .container .bottom .nav {
-    width: 100%;
-    height: 40px;
-    padding-top: 15px;
-    }
-    .container .bottom .nav span {
-    color: #999;
-    cursor: pointer;
-    }
-    .container .bottom .nav span i {
-    font-size: 90px;
-    font-weight: 200;
-    }
-    .container .bottom .nav span:nth-child(1) {
-    padding-left: 10vmin;
-    }
-    .container .bottom .nav span:nth-child(2) {
-    padding-right: 10vmin;
-    float: right;
-    }
-    .container .bottom .orbit {
-    position: absolute;
-    top: 5vh;
-    width: 100%;
-    height: 100vmin;
-    border-radius: 50%;
-    border: 3px solid #eee;
-    margin: auto;
-    left: 0;
-    right: 0;
-    }
-    .container .bottom .orbit .planet_container {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transition: -webkit-transform 0.7s ease-in;
-    transition: transform 0.7s ease-in;
-    transition: transform 0.7s ease-in, -webkit-transform 0.7s ease-in;
-    }
-    .container .bottom .orbit .planet_container .planet {
-    position: absolute;
-    border-radius: 50%;
-    width: 5vmin;
-    height: 5vmin;
-    transition: -webkit-transform 0.4s linear;
-    transition: transform 0.4s linear;
-    transition: transform 0.4s linear, -webkit-transform 0.4s linear;
-    will-change: transform;
-    }
-    .container .bottom .orbit .planet_container .pt {
-    transition: -webkit-transform 0.4s ease-in;
-    transition: transform 0.4s ease-in;
-    transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;
-    -webkit-transform: scale(1.7);
-    transform: scale(1.7);
-    will-change: transform;
-    }
-    .container .bottom .orbit .planet_container .earth {
-    background: #000;
-    background-image: url(/assets/images/12giap/ti.png);
-    background-size: 50px 50px;
-    background-repeat: no-repeat;
-    top: -2.5vmin;
-    left: 0;
-    right: 0;
-    margin: auto;
-    }
-    .container .bottom .orbit .planet_container .earth .moon span {
-    top: -1vmin;
-    left: -1vmin;
-    }
-    .container .bottom .orbit .planet_container .mars {
-    background: #000;
-    background-image: url(/assets/images/12giap/suu.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    right: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .mars .moon span {
-    width: 0.5vmin;
-    height: 0.5vmin;
-    }
-    .container .bottom .orbit .planet_container .mars .moon span:nth-child(1) {
-    top: -1vmin;
-    left: -1vmin;
-    }
-    .container .bottom .orbit .planet_container .mars .moon span:nth-child(2) {
-    left: 1vmin;
-    bottom: -1vmin !important;
-    }
-    .container .bottom .orbit .planet_container .jupiter {
-    background: #000;
-    background-image: url(/assets/images/12giap/dan.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    right: -2.5vmin;
-    bottom: 46.5vmin;
-    }
-    .container .bottom .orbit .planet_container .saturn {
-    background: #000;
-    background-image: url(/assets/images/12giap/mao.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    right: 12vmin;
-    bottom: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .saturn .ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 0 0 5px white, 0 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 12px #d6d6c2;
-    border-radius: 50%;
-    }
-    .container .bottom .orbit .planet_container .uranus {
-    background: #000;
-    background-image: url(/assets/images/12giap/thin.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    right: 0;
-    left: 0;
-    margin: auto;
-    bottom: -2.5vmin;
-    }
-    .container .bottom .orbit .planet_container .neptune {
-    background: #000;
-    background-image: url(/assets/images/12giap/tyj.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    bottom: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .mercury {
-    background: #000;
-    background-image: url(/assets/images/12giap/ngo.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: -2.5vmin;
-    bottom: 46.5vmin;
-    }
-    .container .bottom .orbit .planet_container .venus {
-    background: #000;
-    background-image: url(/assets/images/12giap/mui.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .than {
-    background: #000;
-    background-image: url(/assets/images/12giap/than.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .dau {
-    background: #000;
-    background-image: url(/assets/images/12giap/dau.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .tuat {
-    background: #000;
-    background-image: url(/assets/images/12giap/tuat.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .planet_container .hoi {
-    background: #000;
-    background-image: url(/assets/images/12giap/hoi.png);
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    left: 12vmin;
-    top: 12vmin;
-    }
-    .container .bottom .orbit .name_container {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 9vh;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    }
-    .container .bottom .orbit .name_container .more {
-    /*width: 100%;*/
-    /*padding: 8px 0;*/
-    /*color: #bbb;*/
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.2s;
-    }
-    .container .bottom .orbit .name_container .more:hover {
-    color: #888;
-    transition: color 0.3s;
-    }
-    .container .bottom .orbit .name_container .pn {
-    font-size: 25px;
-    color: #666;
-    text-transform: uppercase;
-    padding-bottom: 4px;
-    letter-spacing: 8px;
-    padding-left: 8px;
-    border-bottom: 3px solid #bbb;
-    }
-    .container .bottom .orbit .name_container .pn .letter {
-    display: inline-block;
-    line-height: 1em;
-    opacity: 0;
-    }
-    .moon {
-    width: 100%;
-    height: 100%;
-    -webkit-animation: planet_rotation 2s infinite linear;
-    animation: planet_rotation 2s infinite linear;
-    }
-    .moon span {
-    width: 0.8vmin;
-    height: 0.8vmin;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    }
-    @-webkit-keyframes planet_rotation {
-    from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-    }
-    to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    }
-    }
-    @keyframes planet_rotation {
-    from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-    }
-    to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    }
-    }
-    @keyframes neon {
-    from {
-    text-shadow:
-    0 0 6px rgba(202,228,225,0.92),
-    0 0 30px rgba(202,228,225,0.34),
-    0 0 12px rgba(30,132,242,0.52),
-    0 0 21px rgba(30,132,242,0.92),
-    0 0 34px rgba(30,132,242,0.78),
-    0 0 54px rgba(30,132,242,0.92);
-    }
-    to {
-    text-shadow:
-    0 0 6px rgba(202,228,225,0.98),
-    0 0 30px rgba(202,228,225,0.42),
-    0 0 12px rgba(30,132,242,0.58),
-    0 0 22px rgba(30,132,242,0.84),
-    0 0 38px rgba(30,132,242,0.88),
-    0 0 60px rgba(30,132,242,1);
-    }
-    }
-    @keyframes bounceInRight {
-    from,
-    60%,
-    75%,
-    90%,
-    to {
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    from {
-    opacity: 0;
-    transform: translate3d(3000px, 0, 0);
-    }
-    60% {
-    opacity: 1;
-    transform: translate3d(-25px, 0, 0);
-    }
-    75% {
-    transform: translate3d(10px, 0, 0);
-    }
-    90% {
-    transform: translate3d(-5px, 0, 0);
-    }
-    to {
-    transform: translate3d(0, 0, 0);
-    }
-    }
-    .bounceInRight {
-    animation: bounceInRight 0.25s;
-    }
-    @keyframes bounceOutLeft {
-    20% {
-    opacity: 1;
-    transform: translate3d(20px, 0, 0);
-    }
-    to {
-    opacity: 0;
-    transform: translate3d(-2000px, 0, 0);
-    }
-    }
-    .bounceOutLeft {
-    animation: bounceOutLeft 0.15s;
-    }
-    @keyframes fadeIn {
-    from {
-    opacity: 0;
-    }
-    to {
-    opacity: 1;
-    }
-    }
-    .fadeIn {
-    animation: fadeIn 0.35s;
-    }
-    .lds-roller {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-    }
-    .lds-roller div {
-    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    transform-origin: 32px 32px;
-    }
-    .lds-roller div:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #fff;
-    margin: -3px 0 0 -3px;
-    }
-    .lds-roller div:nth-child(1) {
-    animation-delay: -0.036s;
-    }
-    .lds-roller div:nth-child(1):after {
-    top: 50px;
-    left: 50px;
-    }
-    .lds-roller div:nth-child(2) {
-    animation-delay: -0.072s;
-    }
-    .lds-roller div:nth-child(2):after {
-    top: 54px;
-    left: 45px;
-    }
-    .lds-roller div:nth-child(3) {
-    animation-delay: -0.108s;
-    }
-    .lds-roller div:nth-child(3):after {
-    top: 57px;
-    left: 39px;
-    }
-    .lds-roller div:nth-child(4) {
-    animation-delay: -0.144s;
-    }
-    .lds-roller div:nth-child(4):after {
-    top: 58px;
-    left: 32px;
-    }
-    .lds-roller div:nth-child(5) {
-    animation-delay: -0.18s;
-    }
-    .lds-roller div:nth-child(5):after {
-    top: 57px;
-    left: 25px;
-    }
-    .lds-roller div:nth-child(6) {
-    animation-delay: -0.216s;
-    }
-    .lds-roller div:nth-child(6):after {
-    top: 54px;
-    left: 19px;
-    }
-    .lds-roller div:nth-child(7) {
-    animation-delay: -0.252s;
-    }
-    .lds-roller div:nth-child(7):after {
-    top: 50px;
-    left: 14px;
-    }
-    .lds-roller div:nth-child(8) {
-    animation-delay: -0.288s;
-    }
-    .lds-roller div:nth-child(8):after {
-    top: 45px;
-    left: 10px;
-    }
-    @keyframes lds-roller {
-    0% {
-    transform: rotate(0deg);
-    }
-    100% {
-    transform: rotate(360deg);
-    }
-    }
-    @keyframes jackInTheBox {
-    from {
-    opacity: 0;
-    transform: scale(0.1) rotate(30deg);
-    transform-origin: center bottom;
-    }
-    50% {
-    transform: rotate(-10deg);
-    }
-    70% {
-    transform: rotate(3deg);
-    }
-    to {
-    opacity: 1;
-    transform: scale(1);
-    }
-    }
-    .jackInTheBox {
-    animation: jackInTheBox 0.35s;
-    }
-    @keyframes bounceInUp {
-    from,
-    60%,
-    75%,
-    90%,
-    to {
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    from {
-    opacity: 0;
-    transform: translate3d(0, 3000px, 0);
-    }
-    60% {
-    opacity: 1;
-    transform: translate3d(0, -20px, 0);
-    }
-    75% {
-    transform: translate3d(0, 10px, 0);
-    }
-    90% {
-    transform: translate3d(0, -5px, 0);
-    }
-    to {
-    transform: translate3d(0, 0, 0);
-    }
-    }
-    .bounceInUp {
-    animation: bounceInUp 0.45s;
-    }
-    .fullInfo {
-    position: absolute;
-    top: 0;
-    z-index: 100;
-    background: #fff;
-    overflow-y: scroll;
-    height: 100%;
-    width: 100%;
-    padding: 15px;
-    background: #fff url(/assets/images/bg.jpg) repeat top center;
-    z-index: 1500;
-    color: #fff
-    }
-    .infoContainer {
-    max-width: 650px;
-    margin: 0 auto;
-    background: #fff;
-    color: #000;
-    padding: 0 30px 30px;
-    box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
-    /* padding: 20px 0; */
-    border-top: 10px solid red;
-    }
-    .detail-header {
-    display: flex;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #f2f2f2;
-    padding-bottom: 15px;
-    text-align: center;
-    margin: 0 -30px;
-    padding: 15px;
-    }
-    /*.detail-header::after {
-    content: '';
-    background-image: url(https://sonchu.vn/wp-content/uploads/2018/08/lakinh.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0 -30px;
-    }
-    */
-    .infoImg {
-    width: 100%;
-    padding: 20px 0;
-    }
-    .fbComments ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    }
-    .fbComments {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    color: #1d2129;
-    direction: ltr;
-    line-height: 1.34;
-    margin-top: 30px;
-    border-top: 1px solid #f2f2f2;
-    padding-top: 15px;
-    }
-    .btnOrder {
-    background-color: red;
-    padding: 10px 30px;
-    margin: 30px auto;
-    color: #fff;
-    text-align: center;
-    font-weight: 700;
-    border-radius: 6px;
-    font-size: 20px;
-    }
-    .btnOrder:hover {
-    background-color: #8B0000;
-    -webkit-transition: background-color 0.25s linear;
-    -ms-transition: background-color 0.25 linear;
-    transition: background-color 0.25 linear;
-    }
-    .btnOrder a {
-    color: #fff;
-    }
-    a, a:hover {
-    color: rgb(0, 71, 255);
-    outline: medium none;
-    text-decoration: none;
-    }
-    </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  </head>
-  <body class="stretched clouds" ng-controller="MainCtrl">
-    <script>
-    window.fbAsyncInit = function() {
-    FB.init({
-    appId            : '1085772744867580',
-    autoLogAppEvents : true,
-    xfbml            : true,
-    version          : 'v3.1'
-    });
-    };
-    (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1085772744867580&autoLogAppEvents=1"></script>
-    <!-- Facebook Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '797253637328226');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=293824861445959&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-    <!-- Document Wrapper
-    ============================================= -->
-    <div class="full_height clearfix">
-      
-      <div ui-view class="main-view"> </div>
-      </div><!-- #wrapper end -->
-      <!-- Go To Top
-      ============================================= -->
-      <div id="gotoTop" class="icon-angle-up"></div>
-      <!-- External JavaScripts
-      ============================================= -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-      <script src="assets/js/scripts-angular.min.js"></script>
-      <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
-      <script src="/node_modules/angular-resource/angular-resource.min.js"></script>
-      <script src="/node_modules/angular-route/angular-route.min.js"></script>
-      <script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
-      <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
-      <script src="/node_modules/slick-carousel/slick/slick.js"></script>
-      <script src="assets/js/angular-slick.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-      <script>
-      // Initialize Firebase
-      var config = {
-      apiKey: "AIzaSyBxJ3_k9WBoxggnNSmTRoGlogaxeBD5GYw",
-      authDomain: "gosua-4f8d4.firebaseapp.com",
-      databaseURL: "https://gosua-4f8d4.firebaseio.com",
-      projectId: "gosua-4f8d4",
-      storageBucket: "gosua-4f8d4.appspot.com",
-      messagingSenderId: "621807127051"
-      };
-      firebase.initializeApp(config);
-      </script>
-      <script src="assets/js/angularfire.min.js"></script>
-      <script src="assets/js/firebaseService.js"></script>
-      <script src="assets/js/app.js"></script>
-      <script src="assets/js/ctrl.js"></script>
-      <script src="assets/js/DetailCtrl.js"></script>
-      <!-- Footer Scripts
-      ============================================= -->
-    </body>
-  </html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="author" content="Cá Cơm" />
+        <!-- <meta name="fragment" content="!"> -->
+        <!-- <base href="/"> -->
+        <meta property="fb:app_id" content="1085772744867580" />
+        <meta property="og:url"           content="{{currentURL}}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="{{title}}" />
+        <meta property="og:description"   content="{{description}}" />
+        <meta property="og:image"         content="{{ogImage}}" />
+        <!-- Stylesheets
+        ============================================= -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+        <link class="next-head" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=vietnamese" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/fb.css" type="text/css" />
+        <link rel="stylesheet" href="/assets/style.css" type="text/css" />
+        <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+        <link rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.css">
+        <link rel="stylesheet" href="node_modules/slick-carousel/slick/slick.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
+        <!-- Document Title
+        ============================================= -->
+        <title>{{title}}</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135514366-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-135514366-2');
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500");
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        }
+        html, body {
+        background: white;
+        /*height: 100%;*/
+        overflow-y: auto;
+        overflow-x: hidden;
+        font-family: 'Montserrat', helvetica, arial, sans-serif;
+        }
+        .button {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        height: 46px;
+        /* width: 150px; */
+        /* text-align: center; */
+        border-radius: 50px;
+        padding: 0 30px;
+        background: #3367af;
+        color: #fff;
+        outline: none;
+        border: none;
+        }
+        button:disabled,
+        button[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        }
+        .text-input {
+        padding: 0 15px;
+        border-radius: 30px;
+        height: 36px;
+        }
+        .text-input.short {
+        width: 120px;
+        }
+        input,
+        input:focus {
+        border: none;
+        outline: none;
+        }
+        .container {
+        position: relative;
+        display: block;
+        width: 100vmin;
+        height: 100%;
+        margin: auto;
+        z-index: 100;
+        }
+        .container .carousel {
+        position: absolute;
+        background: black;
+        /*-webkit-transform: translateY(-150%);
+        transform: translateY(-150%);*/
+        will-change: transform;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        }
+        .container .carousel .info_back {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 13vh;
+        z-index: 30;
+        background-position: center 2%;
+        background-size: cover;
+        background-image: url("https://i.kinja-img.com/gawker-media/image/upload/s--gBFsZfZv--/c_scale,fl_progressive,q_80,w_800/18mozgxwgu2ibjpg.jpg");
+        text-align: center;
+        }
+        .container .carousel .info_back h1 {
+        text-align: center;
+        color: white;
+        margin-top: 1vh;
+        font-weight: 300;
+        font-size: 3vh;
+        text-transform: uppercase;
+        letter-spacing: 15px;
+        opacity: 0;
+        }
+        .container .carousel .info_back h1 .letter {
+        display: inline-block;
+        line-height: 1em;
+        opacity: 0;
+        }
+        .container .carousel .info_back:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(transparent, black);
+        opacity: 1;
+        }
+        .container .carousel .active {
+        display: block !important;
+        }
+        .container .carousel .citem {
+        display: none;
+        background: white;
+        width: 100%;
+        height: 100%;
+        text-align: justify;
+        transition: all 0.4s;
+        }
+        .nav .action {
+        cursor: pointer;
+        color: #fff;
+        }
+        .nav .action:hover {
+        color: #888;
+        }
+        .container .carousel .citem h1 {
+        color: black;
+        font-weight: 400;
+        /*margin-top: 15vh;*/
+        padding: 2vmin 7vmin;
+        display: block;
+        width: 100%;
+        background: #eee;
+        }
+        .sub-neon {
+        padding-top: 30px;
+        font-size: 32px;
+        color: #c6e2ff;
+        animation: neon .08s ease-in-out infinite alternate;
+        }
+        .container .carousel .citem p {
+        color: #777;
+        font-size: 15px;
+        padding: 20px 7vmin;
+        }
+        .container .carousel .citem p span {
+        color: #555;
+        font-size: 19px;
+        display: block;
+        padding: 15px 0;
+        }
+        .container .carousel .citem ul {
+        color: #777;
+        padding: 0 12vmin;
+        }
+        .container .menu {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background: white;
+        display: none;
+        }
+        .container .menu .close {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        }
+        .container .fixed_banner {
+        position: absolute;
+        width: 100%;
+        z-index: 5;
+        }
+        .container .fixed_banner i {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        font-size: 30px;
+        cursor: pointer;
+        }
+        .container .content {
+        position: relative;
+        width: 100%;
+        height: 73vh;
+        text-align: center;
+        box-sizing: border-box;
+        }
+        .container .content .title {
+        font-weight: 300;
+        font-size: 5.8vh;
+        color: #ccc;
+        letter-spacing: 15px;
+        text-transform: uppercase;
+        padding-top: 2vh;
+        /*color: #c6e2ff;*/
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+        /*animation: neon .08s ease-in-out infinite alternate;*/
+        /*opacity: 0;*/
+        }
+        .container .content .title .letter {
+        display: inline-block;
+        line-height: 1em;
+        opacity: 0;
+        color: #fff;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+        text-align: center;
+        }
+        .container .content .helmet {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 9vmin;
+        z-index: -1;
+        }
+        .container .content .helmet img {
+        position: absolute;
+        width: 58vmin;
+        margin: auto;
+        top: 12vmin;
+        bottom: 0vmin;
+        left: 0;
+        right: 0;
+        user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        }
+        .container .content .helmet .planet_position {
+        /*position: absolute;*/
+        /*width: 37vmin;*/
+        /*height: 37vmin;*/
+        background: black;
+        box-shadow: 0 10px 20px 10px black;
+        border-radius: 50%;
+        margin: auto;
+        top: 0;
+        bottom: 12vmin;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        overflow: hidden;
+        }
+        .container .content .helmet .planet_position .planet_shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset 0 -1.5vmax 3vmax 1.2vmax black;
+        border-radius: 50%;
+        z-index: 0;
+        background-image: url(https://cdn6.aptoide.com/imgs/4/5/a/45aaf487cec90d54e6e94cbd2ce79d69_icon.png?w=240);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        /* background-blend-mode: multiply; */
+        opacity: 0.15;
+        }
+        .container .content .helmet .planet_position .planet_photo {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /*background: url("/assets/images/12giap/ti.png");*/
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+        z-index: 1;
+        will-change: background;
+        }
+        .container .bottom {
+        position: absolute;
+        z-index: 9999;
+        bottom: 0;
+        width: 100%;
+        height: 28vh;
+        /*background-color: rgba(0, 0, 0, 0.5);*/
+        display: flex;
+        align-items: center;
+        }
+        .container .bottom .nav {
+        width: 100%;
+        height: 40px;
+        padding-top: 15px;
+        }
+        .container .bottom .nav span {
+        color: #999;
+        cursor: pointer;
+        }
+        .container .bottom .nav span i {
+        font-size: 90px;
+        font-weight: 200;
+        }
+        .container .bottom .nav span:nth-child(1) {
+        padding-left: 10vmin;
+        }
+        .container .bottom .nav span:nth-child(2) {
+        padding-right: 10vmin;
+        float: right;
+        }
+        .container .bottom .orbit {
+        position: absolute;
+        top: 5vh;
+        width: 100%;
+        height: 100vmin;
+        border-radius: 50%;
+        border: 3px solid #eee;
+        margin: auto;
+        left: 0;
+        right: 0;
+        }
+        .container .bottom .orbit .planet_container {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transition: -webkit-transform 0.7s ease-in;
+        transition: transform 0.7s ease-in;
+        transition: transform 0.7s ease-in, -webkit-transform 0.7s ease-in;
+        }
+        .container .bottom .orbit .planet_container .planet {
+        position: absolute;
+        border-radius: 50%;
+        width: 5vmin;
+        height: 5vmin;
+        transition: -webkit-transform 0.4s linear;
+        transition: transform 0.4s linear;
+        transition: transform 0.4s linear, -webkit-transform 0.4s linear;
+        will-change: transform;
+        }
+        .container .bottom .orbit .planet_container .pt {
+        transition: -webkit-transform 0.4s ease-in;
+        transition: transform 0.4s ease-in;
+        transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;
+        -webkit-transform: scale(1.7);
+        transform: scale(1.7);
+        will-change: transform;
+        }
+        .container .bottom .orbit .planet_container .earth {
+        background: #000;
+        background-image: url(/assets/images/12giap/ti.png);
+        background-size: 50px 50px;
+        background-repeat: no-repeat;
+        top: -2.5vmin;
+        left: 0;
+        right: 0;
+        margin: auto;
+        }
+        .container .bottom .orbit .planet_container .earth .moon span {
+        top: -1vmin;
+        left: -1vmin;
+        }
+        .container .bottom .orbit .planet_container .mars {
+        background: #000;
+        background-image: url(/assets/images/12giap/suu.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        right: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .mars .moon span {
+        width: 0.5vmin;
+        height: 0.5vmin;
+        }
+        .container .bottom .orbit .planet_container .mars .moon span:nth-child(1) {
+        top: -1vmin;
+        left: -1vmin;
+        }
+        .container .bottom .orbit .planet_container .mars .moon span:nth-child(2) {
+        left: 1vmin;
+        bottom: -1vmin !important;
+        }
+        .container .bottom .orbit .planet_container .jupiter {
+        background: #000;
+        background-image: url(/assets/images/12giap/dan.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        right: -2.5vmin;
+        bottom: 46.5vmin;
+        }
+        .container .bottom .orbit .planet_container .saturn {
+        background: #000;
+        background-image: url(/assets/images/12giap/mao.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        right: 12vmin;
+        bottom: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .saturn .ring {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 0 5px white, 0 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 12px #d6d6c2;
+        border-radius: 50%;
+        }
+        .container .bottom .orbit .planet_container .uranus {
+        background: #000;
+        background-image: url(/assets/images/12giap/thin.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        right: 0;
+        left: 0;
+        margin: auto;
+        bottom: -2.5vmin;
+        }
+        .container .bottom .orbit .planet_container .neptune {
+        background: #000;
+        background-image: url(/assets/images/12giap/tyj.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        bottom: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .mercury {
+        background: #000;
+        background-image: url(/assets/images/12giap/ngo.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: -2.5vmin;
+        bottom: 46.5vmin;
+        }
+        .container .bottom .orbit .planet_container .venus {
+        background: #000;
+        background-image: url(/assets/images/12giap/mui.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .than {
+        background: #000;
+        background-image: url(/assets/images/12giap/than.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .dau {
+        background: #000;
+        background-image: url(/assets/images/12giap/dau.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .tuat {
+        background: #000;
+        background-image: url(/assets/images/12giap/tuat.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .planet_container .hoi {
+        background: #000;
+        background-image: url(/assets/images/12giap/hoi.png);
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        left: 12vmin;
+        top: 12vmin;
+        }
+        .container .bottom .orbit .name_container {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 9vh;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        }
+        .container .bottom .orbit .name_container .more {
+        /*width: 100%;*/
+        /*padding: 8px 0;*/
+        /*color: #bbb;*/
+        font-weight: 500;
+        cursor: pointer;
+        transition: color 0.2s;
+        }
+        .container .bottom .orbit .name_container .more:hover {
+        color: #888;
+        transition: color 0.3s;
+        }
+        .container .bottom .orbit .name_container .pn {
+        font-size: 25px;
+        color: #666;
+        text-transform: uppercase;
+        padding-bottom: 4px;
+        letter-spacing: 8px;
+        padding-left: 8px;
+        border-bottom: 3px solid #bbb;
+        }
+        .container .bottom .orbit .name_container .pn .letter {
+        display: inline-block;
+        line-height: 1em;
+        opacity: 0;
+        }
+        .moon {
+        width: 100%;
+        height: 100%;
+        -webkit-animation: planet_rotation 2s infinite linear;
+        animation: planet_rotation 2s infinite linear;
+        }
+        .moon span {
+        width: 0.8vmin;
+        height: 0.8vmin;
+        background: #fff;
+        border-radius: 50%;
+        position: absolute;
+        }
+        @-webkit-keyframes planet_rotation {
+        from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        }
+        to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        }
+        }
+        @keyframes planet_rotation {
+        from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        }
+        to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        }
+        }
+        @keyframes neon {
+        from {
+        text-shadow:
+        0 0 6px rgba(202,228,225,0.92),
+        0 0 30px rgba(202,228,225,0.34),
+        0 0 12px rgba(30,132,242,0.52),
+        0 0 21px rgba(30,132,242,0.92),
+        0 0 34px rgba(30,132,242,0.78),
+        0 0 54px rgba(30,132,242,0.92);
+        }
+        to {
+        text-shadow:
+        0 0 6px rgba(202,228,225,0.98),
+        0 0 30px rgba(202,228,225,0.42),
+        0 0 12px rgba(30,132,242,0.58),
+        0 0 22px rgba(30,132,242,0.84),
+        0 0 38px rgba(30,132,242,0.88),
+        0 0 60px rgba(30,132,242,1);
+        }
+        }
+        @keyframes bounceInRight {
+        from,
+        60%,
+        75%,
+        90%,
+        to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        from {
+        opacity: 0;
+        transform: translate3d(3000px, 0, 0);
+        }
+        60% {
+        opacity: 1;
+        transform: translate3d(-25px, 0, 0);
+        }
+        75% {
+        transform: translate3d(10px, 0, 0);
+        }
+        90% {
+        transform: translate3d(-5px, 0, 0);
+        }
+        to {
+        transform: translate3d(0, 0, 0);
+        }
+        }
+        .bounceInRight {
+        animation: bounceInRight 0.25s;
+        }
+        @keyframes bounceOutLeft {
+        20% {
+        opacity: 1;
+        transform: translate3d(20px, 0, 0);
+        }
+        to {
+        opacity: 0;
+        transform: translate3d(-2000px, 0, 0);
+        }
+        }
+        .bounceOutLeft {
+        animation: bounceOutLeft 0.15s;
+        }
+        @keyframes fadeIn {
+        from {
+        opacity: 0;
+        }
+        to {
+        opacity: 1;
+        }
+        }
+        .fadeIn {
+        animation: fadeIn 0.35s;
+        }
+        .lds-roller {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        }
+        .lds-roller div {
+        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        transform-origin: 32px 32px;
+        }
+        .lds-roller div:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #fff;
+        margin: -3px 0 0 -3px;
+        }
+        .lds-roller div:nth-child(1) {
+        animation-delay: -0.036s;
+        }
+        .lds-roller div:nth-child(1):after {
+        top: 50px;
+        left: 50px;
+        }
+        .lds-roller div:nth-child(2) {
+        animation-delay: -0.072s;
+        }
+        .lds-roller div:nth-child(2):after {
+        top: 54px;
+        left: 45px;
+        }
+        .lds-roller div:nth-child(3) {
+        animation-delay: -0.108s;
+        }
+        .lds-roller div:nth-child(3):after {
+        top: 57px;
+        left: 39px;
+        }
+        .lds-roller div:nth-child(4) {
+        animation-delay: -0.144s;
+        }
+        .lds-roller div:nth-child(4):after {
+        top: 58px;
+        left: 32px;
+        }
+        .lds-roller div:nth-child(5) {
+        animation-delay: -0.18s;
+        }
+        .lds-roller div:nth-child(5):after {
+        top: 57px;
+        left: 25px;
+        }
+        .lds-roller div:nth-child(6) {
+        animation-delay: -0.216s;
+        }
+        .lds-roller div:nth-child(6):after {
+        top: 54px;
+        left: 19px;
+        }
+        .lds-roller div:nth-child(7) {
+        animation-delay: -0.252s;
+        }
+        .lds-roller div:nth-child(7):after {
+        top: 50px;
+        left: 14px;
+        }
+        .lds-roller div:nth-child(8) {
+        animation-delay: -0.288s;
+        }
+        .lds-roller div:nth-child(8):after {
+        top: 45px;
+        left: 10px;
+        }
+        @keyframes lds-roller {
+        0% {
+        transform: rotate(0deg);
+        }
+        100% {
+        transform: rotate(360deg);
+        }
+        }
+        @keyframes jackInTheBox {
+        from {
+        opacity: 0;
+        transform: scale(0.1) rotate(30deg);
+        transform-origin: center bottom;
+        }
+        50% {
+        transform: rotate(-10deg);
+        }
+        70% {
+        transform: rotate(3deg);
+        }
+        to {
+        opacity: 1;
+        transform: scale(1);
+        }
+        }
+        .jackInTheBox {
+        animation: jackInTheBox 0.35s;
+        }
+        @keyframes bounceInUp {
+        from,
+        60%,
+        75%,
+        90%,
+        to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        from {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0);
+        }
+        60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+        }
+        75% {
+        transform: translate3d(0, 10px, 0);
+        }
+        90% {
+        transform: translate3d(0, -5px, 0);
+        }
+        to {
+        transform: translate3d(0, 0, 0);
+        }
+        }
+        .bounceInUp {
+        animation: bounceInUp 0.45s;
+        }
+        .fullInfo {
+        position: absolute;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        overflow-y: scroll;
+        height: 100%;
+        width: 100%;
+        padding: 15px;
+        background: #fff url(/assets/images/bg.jpg) repeat top center;
+        z-index: 1500;
+        color: #fff
+        }
+        .infoContainer {
+        max-width: 650px;
+        margin: 0 auto;
+        background: #fff;
+        color: #000;
+        padding: 0 30px 30px;
+        box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+        /* padding: 20px 0; */
+        border-top: 10px solid red;
+        }
+        .detail-header {
+        display: flex;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #f2f2f2;
+        padding-bottom: 15px;
+        text-align: center;
+        margin: 0 -30px;
+        padding: 15px;
+        }
+        /*.detail-header::after {
+        content: '';
+        background-image: url(https://sonchu.vn/wp-content/uploads/2018/08/lakinh.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 -30px;
+        }
+        */
+        .infoImg {
+        width: 100%;
+        padding: 20px 0;
+        }
+        .fbComments ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        }
+        .fbComments {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        color: #1d2129;
+        direction: ltr;
+        line-height: 1.34;
+        margin-top: 30px;
+        border-top: 1px solid #f2f2f2;
+        padding-top: 15px;
+        }
+        .btnOrder {
+        background-color: red;
+        padding: 10px 30px;
+        margin: 30px auto;
+        color: #fff;
+        text-align: center;
+        font-weight: 700;
+        border-radius: 6px;
+        font-size: 20px;
+        }
+        .btnOrder:hover {
+        background-color: #8B0000;
+        -webkit-transition: background-color 0.25s linear;
+        -ms-transition: background-color 0.25 linear;
+        transition: background-color 0.25 linear;
+        }
+        .btnOrder a {
+        color: #fff;
+        }
+        a, a:hover {
+        color: rgb(0, 71, 255);
+        outline: medium none;
+        text-decoration: none;
+        }
+        </style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
+    <body class="stretched clouds" ng-controller="MainCtrl">
+        <script>
+        window.fbAsyncInit = function() {
+        FB.init({
+        appId            : '1085772744867580',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v3.1'
+        });
+        };
+        (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1085772744867580&autoLogAppEvents=1"></script>
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '797253637328226');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=293824861445959&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+        <!-- Document Wrapper
+        ============================================= -->
+        <div class="full_height clearfix">
+            
+            <div ui-view class="main-view"> </div>
+            </div><!-- #wrapper end -->
+            <!-- Go To Top
+            ============================================= -->
+            <div id="gotoTop" class="icon-angle-up"></div>
+            <!-- External JavaScripts
+            ============================================= -->
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script src="assets/js/scripts-angular.min.js"></script>
+            <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+            <script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+            <script src="/node_modules/angular-route/angular-route.min.js"></script>
+            <script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+            <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+            <script src="/node_modules/slick-carousel/slick/slick.js"></script>
+            <script src="assets/js/angular-slick.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+            <script>
+            // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyBxJ3_k9WBoxggnNSmTRoGlogaxeBD5GYw",
+            authDomain: "gosua-4f8d4.firebaseapp.com",
+            databaseURL: "https://gosua-4f8d4.firebaseio.com",
+            projectId: "gosua-4f8d4",
+            storageBucket: "gosua-4f8d4.appspot.com",
+            messagingSenderId: "621807127051"
+            };
+            firebase.initializeApp(config);
+            </script>
+            <script src="assets/js/angularfire.min.js"></script>
+            <script src="assets/js/firebaseService.js"></script>
+            <script src="assets/js/app.js"></script>
+            <script src="assets/js/ctrl.js"></script>
+            <script src="assets/js/DetailCtrl.js"></script>
+            <!-- Footer Scripts
+            ============================================= -->
+        </body>
+    </html>

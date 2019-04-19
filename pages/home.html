@@ -5,23 +5,22 @@
    </div>
    <div class="content">
    		<h3 class="sub-neon">XEM TỬ VI CHUẨN 2019</h3>
-      <h1 class="title">TÝ</h1>
-      Vuốt sang trái/phải hoặc bấm vào nút mũi tên để chuyển sang tuổi kế tiếp
+      <h1 class="title">{{getCurrentAgeName()}}</h1>
       <div class="helmet">
          <!-- <img ondragstart="return false;" src="https://downloadsach.com/wp-content/uploads/2018/03/sach-day-xem-tu-vi.jpg"/> -->
          <div class="planet_position">
             <div class="planet_shadow"></div>
-            <div class="planet_photo"></div>
+            <div class="planet_photo" style="background-image: url({{getCurrentAgePhoto()}})"></div>
          </div>
       </div>
       <div class="nav" style="position: absolute;top:50%;display: flex;width:100%;z-index: 1">
-         <span id="next" class="action" style="margin-right: auto;"><i class="material-icons" style="font-size: 100px">keyboard_arrow_left</i></span>
-         <span id="prev" class="action"><i class="material-icons" style="font-size: 100px">keyboard_arrow_right</i></span>
+         <span ng-click="decreaseAgeId()" id="next" class="action" style="margin-right: auto;"><i class="material-icons" style="font-size: 100px">keyboard_arrow_left</i></span>
+         <span ng-click="increaseAgeId()" id="prev" class="action"><i class="material-icons" style="font-size: 100px">keyboard_arrow_right</i></span>
       </div>
    </div>
    <div class="bottom">
-      <div class="orbit">
-         <div class="planet_container">
+      <div class="orbit2" style="    margin: 0 auto;    background-color: rgba(0, 0, 0, 0.65);    padding: 15px 30px;    border-radius: 15px;">
+        <!--         <div class="planet_container">
             <div class="planet pt earth" id="pl0">
                <div class="moon">
                   <span></span>
@@ -46,12 +45,12 @@
             <div class="planet dau" id="pl10"></div>
             <div class="planet tuat" id="pl11"></div>
             <div class="planet hoi" id="pl12"></div>
-         </div>
-         <div class="name_container">
+         </div>-->
+         <div class="name_container_1" style="text-align: center">
            <!--  <p class="pn">TUỔI TÝ</p> -->
-            <div style="display: flex;flex-direction: row">
+            <div >
             	<div ng-if="currentStep===1" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
-	            	<div style="color: #fff">
+	            	<div style="color: yellow;    font-weight: 900;">
 	            		Vui lòng điền họ tên đầy đủ để xem tử vi
 	            	</div>
 	            	<div style="margin-top: 15px">
@@ -65,21 +64,21 @@
 	            	</div>
 	            </div>
 	            <div ng-if="currentStep===2" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
-	            	<div style="color: #fff">
-	            		Ngày tháng năm sinh của bạn.
+	            	<div style="color: yellow;    font-weight: 900;">
+	            		{{ canchi || "Ngày tháng năm sinh của bạn." }}
 	            	</div>
 	            	<div style="margin-top: 15px;display: flex;flex-direction: row">
 	            		<div style="display: flex;flex-direction: row">
 	            			
-	            			<input class="text-input short" type="text" name="" placeholder="Ngày" ng-model="customerData.day">
+	            			<input class="text-input short" type="text" name="" placeholder="Ngày" ng-model="customerData.day" ng-change="onYearChange()">
 	            		</div>
 	            		<div style="display: flex;flex-direction: row">
 	            			
-	            			<input class="text-input short" type="text" name="" placeholder="Tháng" ng-model="customerData.month">
+	            			<input class="text-input short" type="text" name="" placeholder="Tháng" ng-model="customerData.month" ng-change="onYearChange()">
 	            		</div>
 	            		<div style="display: flex;flex-direction: row">
 	           
-	            			<input class="text-input short" type="text" name="" placeholder="Năm" ng-model="customerData.year">
+	            			<input class="text-input short" id="year" type="text" name="year" placeholder="Năm" ng-model="customerData.year" ng-change="onYearChange()">
 	            		</div>
 	            	</div>
 	            	<div style="margin-top: 15px">
@@ -90,7 +89,7 @@
 	            	</div>
 	            </div>
 	            <div ng-if="currentStep===3" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
-	            	<div style="color: #fff">
+	            	<div style="color: yellow;    font-weight: 900;">
 	            		Hãy chọn giới tính.
 	            	</div>
 	            	<div style="margin-top: 15px;display: flex;flex-direction: row">
@@ -114,7 +113,7 @@
 	            	</div>
 	            </div>
 	            <div ng-if="currentStep===4" ng-class="transforming ? 'bounceOutLeft' : 'bounceInRight'">
-	            	<div style="color: #fff">
+	            	<div style="color: yellow;    font-weight: 900;">
 	            		{{ ready ? 'Xử lý thông tin đã xong. Kết quả cho bạn thật bất ngờ!' : 'Xin vui lòng đợi trong giây lát. Lá số tử vi của bạn đang được lập...' }}
 	            	</div>
 	            	<div style="margin-top: 15px;" ng-if="!ready">
@@ -131,252 +130,3 @@
       </div>
    </div>
 </div>
-<script id="rendered-js">
-   //ISPIRATION: https://www.uplabs.com/posts/xore-solar-system
-   //Full page simoberny.it
-   //Best on mobile
-   
-   /* Inizializzazione HammerJS */
-   var element = document.getElementById('mobile_control');
-   var hammertime = new Hammer(element);
-   
-   var swiped_top = false;
-   
-   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-   hammertime.on('swipeleft', function(ev) {
-   cmove("prev");
-   });
-   hammertime.on('swiperight', function(ev) {
-   cmove("next");
-   });
-   /* * * * * * * * * */
-   
-   $(".action").on("click", function(){
-   cmove($(this).attr('id'));
-   });
-   
-   $('.title').each(function(){
-   $(this).html("tUỔI TÝ".replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-   });
-   
-   
-   anime.timeline({})
-   .add({
-   targets: '.title',
-   opacity: [0,1],
-   easing: "easeOutExpo",
-   duration: 100
-   })
-   .add({
-   targets: '.title .letter',
-   translateX: [40,0],
-   translateZ: 0,
-   opacity: [0,1],
-   easing: "easeOutExpo",
-   duration: 1200,
-   delay: function(el, i) {
-     return 500 + 30 * i;
-   }
-   });
-   
-   var angle = 0;
-   var planet_id = 0;
-   window.currentAgeId = 0;
-   
-   function cmove(dir){
-   var n_planet = 12, next_id;
-   var prev, next;
-   var top = $("#pl"+ planet_id);
-   var orbit = $(".planet_container");
-   
-   top.removeClass("pt");
-   
-   if(planet_id == 0){
-     prev = $("#pl"+ (n_planet-1));
-     next = $("#pl"+ (planet_id+1)%n_planet);
-   }else{
-     prev = $("#pl"+ (planet_id-1));
-     next = $("#pl"+ (planet_id+1)%n_planet);
-   }
-   
-   if(dir == "prev"){
-     next_id = (planet_id + 1) % n_planet;
-     angle -= 45;
-     next.addClass("pt");
-     planet_id++;
-   }else{
-     if(planet_id == 0){
-       next_id = 11;
-       planet_id = 11;
-     }else{
-       next_id = planet_id-1;
-       --planet_id;
-     }
-     angle += 45;
-     prev.addClass("pt");
-   }
-   
-   $(".active").removeClass("active");
-   $("#p" + planet_id).addClass("active");
-   $(".info_back h1").text(planet[next_id]);
-   
-   if(swiped_top){
-     $('.info_back h1').each(function(){
-       $(this).html(planet[planet_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-     });
-     
-     anime.timeline({})
-     .add({
-       targets: '.info_back h1',
-       opacity: [0,1],
-       easing: "easeOutExpo",
-       duration: 100
-     })
-     .add({
-       targets: '.info_back h1 .letter',
-       translateX: [40,0],
-       translateZ: 0,
-       opacity: [0,1],
-       easing: "easeOutExpo",
-       duration: 1200,
-       delay: function(el, i) {
-         return 500 + 30 * i;
-       }
-     });
-   }
-   
-   $('.title').each(function(){
-     $(this).html(planet[next_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-   });
-   
-   anime.timeline({})
-   .add({
-     targets: '.title .letter',
-     translateX: [40,0],
-     translateZ: 0,
-     opacity: [0,1],
-     easing: "easeOutExpo",
-     duration: 1200,
-     delay: function(el, i) {
-       return 500 + 30 * i;
-     }
-   });
-   
-   $('.pn').each(function(){
-     $(this).html(planet[next_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-   });
-   
-   anime.timeline({})
-   .add({
-     targets: '.pn .letter',
-     translateX: [40,0],
-     translateZ: 0,
-     opacity: [0,1],
-     easing: "easeOutExpo",
-     duration: 1200,
-     delay: function(el, i) {
-       return 500 + 30 * i;
-     }
-   });
-   
-   var ani_dir = (dir == "next") ? "0%" : "100%";
-   
-   anime.timeline({})
-   .add({
-     targets: '.planet_photo',
-     opacity: {
-       value: [1,0]
-     },
-     duration: 700,
-     easing: 'easeOutQuad',
-     complete: function(anim){
-     	window.currentAgeId = planet_id;
-       $(".planet_photo").css("background-image", "url(" + photo_planet[next_id] +")"); 
-     }
-   })
-   .add({
-     targets: '.planet_photo',
-     opacity: [0.2,1],
-     duration: 500,
-     easing: 'easeOutQuad'
-   });
-   
-   $(".info_back").css("background-image", "url(" + photo_planet[next_id] +")");
-   orbit.css("transform", "rotateZ(" + angle + "deg)");
-   }
-   
-   $("#open_menu").on("click", function(){
-   $(".menu").show();
-   });
-   
-   $(".close").on("click", function(){
-   $(".menu").hide();
-   });
-   
-   $(".more").on("click", function(){
-   swiped_top = true;
-   openmodal();
-   });
-   
-   function openmodal(){
-   anime.timeline({})
-   .add({
-     targets: '.carousel',
-     translateY: ["100%", 0],
-     duration: 600,
-     easing: 'easeOutQuad',
-   });
-   
-     $('.info_back h1').each(function(){
-       $(this).html(planet[planet_id].replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
-     });
-     
-     anime.timeline({})
-     .add({
-       targets: '.info_back h1',
-       opacity: [0,1],
-       easing: "easeOutExpo",
-       duration: 100
-     })
-     .add({
-       targets: '.info_back h1 .letter',
-       translateX: [40,0],
-       translateZ: 0,
-       opacity: [0,1],
-       easing: "easeOutExpo",
-       duration: 1200,
-       delay: function(el, i) {
-         return 500 + 30 * i;
-       }
-     });
-   }
-   
-   function closemodal(){
-   if(swiped_top){
-     anime.timeline({})
-     .add({
-       targets: '.carousel',
-       translateY: [0, "100%"],
-       duration: 600,
-       easing: 'easeOutQuad',
-     });
-     swiped_top = false;
-   }
-   }
-   
-   var photo_planet = [
-   "/assets/images/12giap/ti.png",
-   "/assets/images/12giap/suu.png",
-   "/assets/images/12giap/dan.png",
-   "/assets/images/12giap/mao.png",
-   "/assets/images/12giap/thin.png",
-   "/assets/images/12giap/tyj.png",
-   "/assets/images/12giap/ngo.png",
-   "/assets/images/12giap/mui.png",
-   "/assets/images/12giap/than.png",
-   "/assets/images/12giap/dau.png",
-   "/assets/images/12giap/tuat.png",
-   "/assets/images/12giap/hoi.png"
-   ];
-   var planet = ["TUỔI TÝ", "TUỔI SỬU", "TUỔI DẦN", "TUỔI MÃO", "TUỔI THÌN", "TUỔI TỴ", "TUỔI NGỌ", "TUỔI MÙI", "TUỔI THÂN", "TUỔI DẬU", "TUỔI TUẤT", "TUỔI HỢI"];
-</script>
