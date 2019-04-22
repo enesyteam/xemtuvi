@@ -353,7 +353,7 @@ goSua.controller('MainCtrl', function(
         'hoi'
     ];
 
-    $scope.currentAgeId = 0;
+    $scope.currentAgeId = -1;
 
     $scope.customerData = {
         name: '',
@@ -429,7 +429,7 @@ goSua.controller('MainCtrl', function(
 
     $scope.getInfo = function() {
         var currentAgeId = $scope.currentAgeId;
-        var age = $scope.ageShort[ currentAgeId ];
+        var age = currentAgeId ? $scope.ageShort[ currentAgeId ] : null;
 
         var s = age ? $scope.getAgeName( age ) : null;
 
@@ -455,29 +455,37 @@ goSua.controller('MainCtrl', function(
    ];
 
    $scope.getCurrentAgePhoto = function() {
-        return $scope.agePhotos[$scope.currentAgeId];
+        return $scope.currentAgeId > -1 ? $scope.agePhotos[$scope.currentAgeId] : "/assets/images/12giap/null.png";
    }
 
    $scope.ageNames = ["TUỔI TÝ", "TUỔI SỬU", "TUỔI DẦN", "TUỔI MÃO", "TUỔI THÌN", "TUỔI TỴ", "TUỔI NGỌ", "TUỔI MÙI", "TUỔI THÂN", "TUỔI DẬU", "TUỔI TUẤT", "TUỔI HỢI"];
 
    $scope.getCurrentAgeName = function() {
-        return $scope.ageNames[$scope.currentAgeId];
+       return $scope.currentAgeId > -1 ? $scope.ageNames[$scope.currentAgeId] : null;
    }
 
    $scope.decreaseAgeId = function() {
-        if ($scope.currentAgeId == 0) {
+
+        if ($scope.currentAgeId == 0 || !$scope.currentAgeId) {
                 $scope.currentAgeId = 11;
         } else {
             $scope.currentAgeId--;
         }
+
+        console.log("$scope.getCurrentAgePhoto", $scope.getCurrentAgePhoto());
    }
 
    $scope.increaseAgeId = function() {
-        if ($scope.currentAgeId == 11) {
-                $scope.currentAgeId = 0;
+    console.log('$scope.currentAgeId', $scope.currentAgeId);
+        if ($scope.currentAgeId == 11 || !$scope.currentAgeId) {
+                $timeout(function() {
+                    $scope.currentAgeId = 0;
+                }, 10);
         } else {
             $scope.currentAgeId++;
         }
+
+        console.log("$scope.getCurrentAgePhoto", $scope.getCurrentAgePhoto());
    }
 
    $scope.onDateChange = function() {
@@ -493,7 +501,7 @@ goSua.controller('MainCtrl', function(
         if ( !year || year === 0 || year < 1950 || year > 2019 ) {
             // canchi = null;
             $scope.canchi = null;
-            $scope.currentAgeId = null;
+            $scope.currentAgeId = -1;
             return;
         }
         // console.log("lunarYear", lunarYear);
